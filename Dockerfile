@@ -24,6 +24,4 @@ COPY inst/Rprofile.site $R_HOME/etc/Rprofile.site
 RUN Rscript -e "options(warn = 2); install.packages('remotes')"
 RUN Rscript -e "options(warn = 2); remotes::install_github('r-hub/sysreqs', ref='3860f2b512a9c3bd3db6791c2ff467a1158f4048')"
 ONBUILD COPY DESCRIPTION .
-ONBUILD RUN RHUB_PLATFORM="linux-x86_64-ubuntu-gcc" \
-  sysreqs=$(Rscript -e "cat(sysreqs::sysreq_commands('DESCRIPTION'))") && \
-  eval "$sysreqs"
+# ONBUILD RUN RHUB_PLATFORM="linux-x86_64-ubuntu-gcc" sysreqs=$(Rscript -e "cat(sysreqs::sysreq_commands('DESCRIPTION'))") && eval "$sysreqs"
