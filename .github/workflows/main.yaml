@@ -1,0 +1,23 @@
+on:
+  push:
+  pull_request:
+    types: [assigned, opened, synchronize, reopened]
+  release:
+    types: [published, created, edited]
+
+jobs:
+  build:
+    name: Build and Push Image
+    runs-on: ubuntu-18.04
+    steps:
+      - uses: actions/checkout@v2
+      - uses: docker/build-push-action@v1
+        with:
+          # by convention, the same
+          repository: ${{ github.repository }}
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_TOKEN }}
+          tag_with_sha: true
+          tag_with_ref: true
+          add_git_labels: true
+          push: ${{ github.event_name != 'pull_request' }}
