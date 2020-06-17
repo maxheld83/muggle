@@ -17,15 +17,21 @@ view_url <- function(..., open = interactive()) {
   invisible(url)
 }
 
-#' Depend on another package (version-locked)
-#'
-#' Same as [usethis::use_package()], but with `min_version = TRUE`.
-#'
 #' @inherit usethis::use_package
-#'
-#' @family repeated helpers
-#'
+#' @description [usethis::use_package()] with muggle defaults
+#' @family helpers for repeated interactive use
 #' @export
 use_package2 <- function(package, type = "Imports") {
   usethis::use_package(package = package, type = type, min_version = TRUE)
+}
+
+#' @inherit rcmdcheck::rcmdcheck
+#' @description [rcmdcheck::rcmdcheck()] with muggle defaults
+#' @family helpers for repeated non-interactive use
+#' @export
+rcmdcheck2 <- function(error_on = "warning") {
+  rcmdcheck::rcmdcheck(
+    args = c("--no-manual", "--as-cran"),
+    check_dir = "check"
+  )
 }

@@ -7,10 +7,7 @@
 use_vscode()
 }
 \description{
-Set up vscode inside a package
-}
-\details{
-\itemize{
+\enumerate{
 \item adds vscode files to \code{.Rbuildignore}
 }
 }

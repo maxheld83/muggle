@@ -2,7 +2,7 @@
 % Please edit documentation in R/helpers.R
 \name{use_package2}
 \alias{use_package2}
-\title{Depend on another package (version-locked)}
+\title{Depend on another package}
 \usage{
 use_package2(package, type = "Imports")
 }
@@ -14,7 +14,7 @@ use_package2(package, type = "Imports")
 is case insensitive.}
 }
 \description{
-Same as \code{\link[usethis:use_package]{usethis::use_package()}}, but with \code{min_version = TRUE}.
+\code{\link[usethis:use_package]{usethis::use_package()}} with muggle defaults
 }
 \examples{
 \dontrun{
@@ -26,4 +26,4 @@ use_dev_package("glue")
 \seealso{
 The \href{https://r-pkgs.org/description.html#dependencies}{dependencies section} of \href{https://r-pkgs.org}{R Packages}.
 }
-\concept{repeated helpers}
+\concept{helpers for repeated interactive use}

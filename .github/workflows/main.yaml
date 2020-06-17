@@ -46,7 +46,6 @@ jobs:
           tag_with_sha: false
           tags: ${{ github.sha }}
           add_git_labels: true
-          tags: ${{ github.sha }}
           push: ${{ github.event_name != 'pull_request' }}
   check:
     needs: build
@@ -59,6 +58,4 @@ jobs:
       - name: Check
         env:
           _R_CHECK_CRAN_INCOMING_REMOTE_: false
-        run: |
-          rcmdcheck::rcmdcheck(args = c("--no-manual"), error_on = "error", check_dir = "check")
-        shell: Rscript {0}
+        run: Rscript -e "muggle::rcmdcheck2()"
