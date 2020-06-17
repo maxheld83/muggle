@@ -56,6 +56,4 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Check
-        env:
-          _R_CHECK_CRAN_INCOMING_REMOTE_: false
         run: Rscript -e "muggle::rcmdcheck2()"

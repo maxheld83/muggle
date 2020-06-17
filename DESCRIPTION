@@ -24,4 +24,5 @@ Imports:
     gert (>= 0.3),
     fs (>= 1.4.1),
     desc (>= 1.2.0),
-    rcmdcheck (>= 1.3.3)
+    rcmdcheck (>= 1.3.3),
+    withr (>= 2.2.0)
