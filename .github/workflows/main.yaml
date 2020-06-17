@@ -6,16 +6,17 @@ on:
     types: [published, created, edited]
 
 jobs:
-  build-builder:
+  build-onbuild:
     # this step is only necessary for this image
-    name: Build and Push Builder Image
+    name: Build and Push Onbuild Image
     runs-on: ubuntu-18.04
     steps:
       - uses: actions/checkout@v2
       - uses: docker/build-push-action@v1
         with:
           # by convention, the same
-          repository: ${{ github.repository }}
+          repository: ${{ github.repository }}-onbuild
+          # must be pushed to docker hub, not docker.pkg.github.com because latter is private, which cannot be used in `container` field.
           dockerfile: builder.Dockerfile
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_TOKEN }}
@@ -25,21 +26,24 @@ jobs:
           tags: ${{ github.sha }}
           add_git_labels: true
           push: ${{ github.event_name != 'pull_request' }}
-  build:
-    # this could run as a second step to above, just run here as a separate step to make it easier to model other pkg off of this yaml.
-    needs: build-builder
-    name: Build and Push Image
+  cicd:
+    needs: build-onbuild
     runs-on: ubuntu-18.04
+    # only necessary here
+    container: ${{ github.repository }}-onbuild:${{ github.sha}}
     steps:
       - uses: actions/checkout@v2
+      - name: Check
+        run: Rscript -e "muggle::rcmdcheck2()"
       - uses: docker/build-push-action@v1
+        name: Build Dev Image
         with:
-          repository: ${{ github.repository }}/builder
+          repository: ${{ github.repository }}/dev
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
           registry: docker.pkg.github.com
           # only necessary here
-          build_args: MUGGLE_BUILTER_TAG=${{ github.sha }}
+          build_args: MUGGLE_BUILDER_TAG=${{ github.sha }}
           # this will set "latest" if master as per https://github.com/docker/build-push-action
           tag_with_ref: true
           # we're relying on long shas only to keep things easy
@@ -47,13 +51,3 @@ jobs:
           tags: ${{ github.sha }}
           add_git_labels: true
           push: ${{ github.event_name != 'pull_request' }}
-  check:
-    needs: build
-    name: check
-    runs-on: ubuntu-18.04
-    # using image build above
-    container: ${{ github.repository }}/builder:${{ github.sha }}
-    steps:
-      - uses: actions/checkout@v2
-      - name: Check
-        run: Rscript -e "muggle::rcmdcheck2()"

@@ -4,10 +4,10 @@ FROM rocker/rstudio:3.6.3-ubuntu18.04 AS builder
 # below have to be in sync with above
 # cannot persist env vars based on running scripts
 ENV R_HOME="/usr/local/lib/R"
+# TODO remove when migrated to rspm https://github.com/subugoe/muggle/issues/25
 ENV RHUB_PLATFORM="linux-x86_64-ubuntu-gcc"
 
 # set RSPM for faster binaries
-# this only needs to persist at build-time
 COPY builder_img/Rprofile.site $R_HOME/etc/Rprofile.site
 # remember this must *exist*!
 ENV R_LIBS_SITE="/usr/local/lib/R/site-library"
@@ -26,24 +26,27 @@ RUN add-apt-repository -y ppa:cran/libgit2 && apt-get install -y \
   libproj-dev
 
 # install builder software (needed at build time, not at run time)
-COPY DESCRIPTION .
+COPY . /muggle
+WORKDIR /muggle
 
-# install builder system dependencies (automatic)
+# install muggle builder system dependencies (automatic)
+# these steps are duplicated in muggle::install_*
 RUN Rscript -e "options(warn = 2); install.packages('remotes')"
-RUN Rscript -e "options(warn = 2); remotes::install_github('r-hub/sysreqs', ref='3860f2b512a9c3bd3db6791c2ff467a1158f4048')"
-RUN cat DESCRIPTION
+RUN Rscript -e "options(warn = 2); remotes::install_github('r-hub/sysreqs', ref='f068afa96c2f454a54de0b350800dee7564239df')"
 RUN sysreqs=$(Rscript -e "cat(sysreqs::sysreq_commands('DESCRIPTION'))") && \
   eval "$sysreqs"
 
-# install builder R dependencies
+# install muggle builder R dependencies
 RUN Rscript -e "options(warn = 2); remotes::install_deps(dependencies = TRUE)"
+
+# install muggle into container
+RUN Rscript -e "remotes::install_local(upgrade = FALSE)"
 
 # triggers for app software (needed at runtime)
 # just overwrite existing description, not needed
 ONBUILD COPY DESCRIPTION .
 # install runtime sytem dependencies (automatic)
-ONBUILD RUN sysreqs=$(Rscript -e "cat(sysreqs::sysreq_commands('DESCRIPTION'))") && \
-  eval "$sysreqs"
+ONBUILD RUN Rscript -e "muggle::install_sysdeps()"
 # TODO still need to cache in R dependencies https://github.com/subugoe/muggle/issues/51
 # copy in cache
 # if this is run outside of github actions, will just copy empty dir
