@@ -1,38 +1,26 @@
 Package: muggle
-Title: Opinionated devops for R data products strictly without magic
+Title: What the Package Does (One Line, Title Case)
 Version: 0.0.0.9000
 Authors@R:
-    c(
-      person(
-        given = "Maximilian",
-        family = "Held",
-        role = c("aut", "cre"),
-        email = "info@maxheld.de",
-        comment = c(ORCID = "0000-0002-4703-5388")
-      ),
-      person(
-        given = "Göttingen State and University Library",
-        role = c("cph", "fnd")
-      ),
-      person(
-        given = "German Research Foundation",
-        role = c("spn")
-      )
-    )
-License: MIT + file LICENSE.md
+    c(person(given = "Maximilian",
+             family = "Held",
+             role = c("aut", "cre"),
+             email = "info@maxheld.de",
+             comment = c(ORCID = "0000-0002-4703-5388")),
+      person(family = "Göttingen State and University Library",
+             role = c("cph", "fnd")))
+Description: What the package does (one paragraph).
+License: MIT + file LICENSE
 Encoding: UTF-8
-Language: en
 LazyData: true
 Roxygen: list(markdown = TRUE)
-URL: https://subugoe.github.io/muggle, https://github.com/subugoe/muggle/
-BugReports: https://github.com/subugoe/muggle/issues
 RoxygenNote: 7.1.0
+URL: https://github.com/subugoe/muggle
+BugReports: https://github.com/subugoe/muggle/issues
 Imports:
-    covr (>= 3.4.0),
-    rcmdcheck (>= 1.3.0),
-    pkgdown (>= 1.5.0),
-    testthat (>= 2.1.0),
-    remotes (>= 2.1.0)
-Suggests:
-    devtools (>= 2.2.0),
-    usethis (>= 1.6.0)
+    usethis (>= 1.6.1),
+    checkmate (>= 2.0.0),
+    rlang (>= 0.4.6),
+    gert (>= 0.3),
+    fs (>= 1.4.1),
+    desc (>= 1.2.0)

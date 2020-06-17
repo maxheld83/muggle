@@ -5,5 +5,11 @@
 ^builder_img$
 Dockerfile
 .dockerignore
-^*\.code-workspace
-.vscode
+^_pkgdown\.yml$
+^docs$
+^pkgdown$
+^pkgdown/_pkgdown\.yml$
+^muggle\.Rproj$
+^\.Rproj\.user$
+^FALSE$
+[.]code-workspace$
