@@ -23,7 +23,7 @@ install_sysdeps <- function() {
 #' @export
 install_deps2 <- function() {
   # by default, install_deps does not error out on failed installs, which causes hard to understand downstream problems
-  withr::local_options(warn = 2)
+  withr::local_options(new = list(warn = 2))
   # ignore, for now, everything that comes with muggle
   # exception, out of necessity, is remotes, which has been installed twice.
   withr::local_libpaths(new = .libPaths()[1])
