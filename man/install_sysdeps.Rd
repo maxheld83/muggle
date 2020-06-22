@@ -9,4 +9,8 @@ install_sysdeps()
 \description{
 Infers and installs system dependencies from \code{DESCRIPTION} via the \href{https://github.com/r-hub/sysreqs}{r-hub/sysreqs} project.
 }
+\seealso{
+Other computing environment: 
+\code{\link{install_deps2}()}
+}
 \concept{computing environment}

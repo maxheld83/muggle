@@ -18,6 +18,9 @@ install_sysdeps <- function() {
 
 #' @inherit remotes::install_deps
 #' @description [remotes::install_deps()] with muggle defaults
+#' @family computing environment
+#'
+#' @export
 install_deps2 <- function() {
   # by default, install_deps does not error out on failed installs, which causes hard to understand downstream problems
   withr::local_options(warn = 2)

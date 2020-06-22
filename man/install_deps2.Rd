@@ -12,3 +12,8 @@ install_deps2()
 \examples{
 \dontrun{install_deps(".")}
 }
+\seealso{
+Other computing environment: 
+\code{\link{install_sysdeps}()}
+}
+\concept{computing environment}
