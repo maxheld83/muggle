@@ -15,3 +15,14 @@ install_sysdeps <- function() {
     command = sysdep_cmds
   )
 }
+
+#' @inherit remotes::install_deps
+#' @description [remotes::install_deps()] with muggle defaults
+install_deps2 <- function() {
+  # by default, install_deps does not error out on failed installs, which causes hard to understand downstream problems
+  withr::local_options(warn = 2)
+  # ignore, for now, everything that comes with muggle
+  # exception, out of necessity, is remotes, which has been installed twice.
+  withr::local_libpaths(new = .libPaths()[1])
+  remotes::install_deps(dependencies = TRUE)
+}

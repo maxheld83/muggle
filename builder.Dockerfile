@@ -10,7 +10,7 @@ ENV RHUB_PLATFORM="linux-x86_64-ubuntu-gcc"
 # set RSPM for faster binaries
 COPY builder_img/Rprofile.site $R_HOME/etc/Rprofile.site
 # remember this must *exist*!
-ENV R_LIBS_SITE="/usr/local/lib/R/site-library"
+ENV R_LIBS_SITE=$R_HOME/site-library
 # install all builder deps here
 ENV R_LIBS=$R_LIBS_SITE
 
@@ -29,33 +29,31 @@ RUN add-apt-repository -y ppa:cran/libgit2 && apt-get install -y \
 COPY . /muggle
 WORKDIR /muggle
 
+SHELL ["Rscript", "-e"]
 # install muggle builder system dependencies (automatic)
-# these steps are duplicated in muggle::install_*
-RUN Rscript -e "options(warn = 2); install.packages('remotes')"
-RUN Rscript -e "options(warn = 2); remotes::install_github('r-hub/sysreqs', ref='f068afa96c2f454a54de0b350800dee7564239df')"
-RUN sysreqs=$(Rscript -e "cat(sysreqs::sysreq_commands('DESCRIPTION'))") && \
-  eval "$sysreqs"
+# these steps are duplicated in muggle::install_*, because muggle isn't available in the dockerfile yet
+RUN options(warn = 2); install.packages('remotes')
+RUN options(warn = 2); remotes::install_github('r-hub/sysreqs', ref='f068afa96c2f454a54de0b350800dee7564239df')
+RUN system(command = sysreqs::sysreq_commands('DESCRIPTION'))
 
 # install muggle builder R dependencies
-RUN Rscript -e "options(warn = 2); remotes::install_deps(dependencies = TRUE)"
+RUN options(warn = 2); remotes::install_deps(dependencies = TRUE)
 
 # install muggle into container
-RUN Rscript -e "remotes::install_local(upgrade = FALSE)"
+RUN remotes::install_local(upgrade = FALSE)
+
+ENV R_LIBS=$R_HOME/library
+# install remotes again so that it lingers with user lib for runtime, necessary for install_deps2
+RUN options(warn = 2); install.packages('remotes')
+
+# set correct order; user (runtime) lib precedes (build-time) site lib
+ENV R_LIBS=$R_HOME/library:$R_LIBS_SITE
 
 # triggers for app software (needed at runtime)
 # just overwrite existing description, not needed
 ONBUILD COPY DESCRIPTION .
 # install runtime sytem dependencies (automatic)
-ONBUILD RUN Rscript -e "muggle::install_sysdeps()"
+ONBUILD RUN muggle::install_sysdeps()
 # TODO still need to cache in R dependencies https://github.com/subugoe/muggle/issues/51
 # copy in cache
-# if this is run outside of github actions, will just copy empty dir
-# COPY .deps/ ${LIB_PATH}
-# install runtime R dependencies here, not to site
-# R_LIBS_SITE must be unavailable now, so that *all* dependencies for runtime are cleanly installed
-ONBUILD ENV R_LIBS=$R_HOME/library
-# this requires a reinstall of remotes, which will linger with the runtime deps
-ONBUILD RUN Rscript -e "options(warn = 2); install.packages('remotes')"
-ONBUILD RUN Rscript -e "options(warn = 2); remotes::install_deps(dependencies = TRUE)"
-# enable other images again
-ONBUILD ENV R_LIBS=$R_HOME/library:$R_LIBS_SITE
+ONBUILD RUN muggle::install_deps2()
