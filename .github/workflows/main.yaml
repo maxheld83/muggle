@@ -29,7 +29,9 @@ jobs:
   CICD:
     needs: build-onbuild
     runs-on: ubuntu-18.04
-    shell: Rscript {0}
+    defaults:
+      run:
+        shell: Rscript {0}
     # github sha only necessary here
     container: ${{ github.repository }}-onbuild:${{ github.sha}}
     steps:
