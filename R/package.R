@@ -5,10 +5,11 @@
 #' Wraps the following steps, *if the respective files or configuration do not already exist*:
 #'
 #' 1. Sets up package scaffolding via [usethis::create_package()].
-#' 2. Initialises a git repo via [usethis::use_git()].
-#' 3. Creates a repo on GitHub and sets it as an origin remote.
-#' 4. Adds a `README.md` via [usethis::use_readme_md()].
-#' 5. Opens the `DESCRIPTION` and `README.md` for additional edits.
+#' 1. Initialises a git repo via [usethis::use_git()].
+#' 1. Creates a repo on GitHub and sets it as an origin remote.
+#' 1. Adds a `README.md` via [usethis::use_readme_md()].
+#' 1. Sets up the project for unit tests via [usethis::use_testthat()] and test coverage via [usethis::use_coverage()].
+#' 1. Opens the `DESCRIPTION` and `README.md` for additional edits.
 #'
 #' @details # warning
 #' - Must not be run *inside* a package, but at the root of all packages
@@ -70,6 +71,14 @@ create_muggle <- function(path,
   usethis::ui_todo(x = "Edit the {usethis::ui_code('DESCRIPTION')}.")
   usethis::edit_file("DESCRIPTION")
 
+  usethis::use_readme_md()
+
+  # usethis::use_testthat() is actually a bad idea because it would pollute the DESCRIPTION
+  usethis::use_testthat()
+  remove_dep("testthat")
+  usethis::use_codecov()
+  remove_dep("covr")
+
   # # cleaner to have this in a separate folder
   # usethis::use_pkgdown(config_file = "pkgdown/_pkgdown.yml")
 
@@ -78,7 +87,6 @@ create_muggle <- function(path,
   # usethis::use_package_doc()
   # usethis::use_roxygen_md()
 
-  usethis::use_readme_md()
   usethis::ui_todo(x = "Edit the {usethis::ui_code('README.md')}.")
   usethis::edit_file("README.md")
 }

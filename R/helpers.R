@@ -17,6 +17,19 @@ view_url <- function(..., open = interactive()) {
   invisible(url)
 }
 
+#' Remove an unneeded dependency
+#' @keywords internal
+#' @export
+remove_dep <- function(x) {
+  desc::desc_del_dep(x)
+  usethis::ui_done(
+    x = glue::glue(
+      "Removing {dep} from DESCRIPTION again, because it is already included in the muggle image.",
+      dep = x
+    )
+  )
+}
+
 #' @inherit usethis::use_package
 #' @description [usethis::use_package()] with muggle defaults
 #' @family helpers for repeated interactive use

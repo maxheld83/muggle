@@ -1,6 +1,7 @@
 # muggle
 
 <!-- badges: start -->
+[![Codecov test coverage](https://codecov.io/gh/subugoe/muggle/branch/master/graph/badge.svg)](https://codecov.io/gh/subugoe/muggle?branch=master)
 <!-- badges: end -->
 
 {muggle} is an R package to implement DevOps best practices for R data products.

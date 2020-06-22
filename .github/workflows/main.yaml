@@ -43,7 +43,7 @@ jobs:
           # unfortunately cannot retrieve this programmatically without a separate step read out env var or installing github action npm to image
           path: "/usr/local/lib/R/library"
           # querying dependencies against CRAN is unnecessary, because they are all locked down via RSPM
-          # TODO use job.container here for other packages
+          # TODO use job.container here elsewhere for other packages
           key: ${{ hashFiles('DESCRIPTION')}}
       - name: Install System Dependencies
         run: muggle::install_sysdeps()
@@ -51,6 +51,8 @@ jobs:
         run: muggle::install_deps2()
       - name: Check
         run: muggle::rcmdcheck2()
+      - name: Test Coverage
+        run: covr::codecov()
       - uses: docker/build-push-action@v1
         name: Build Dev Image
         with:

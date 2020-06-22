@@ -13,3 +13,4 @@ Dockerfile
 ^\.Rproj\.user$
 ^FALSE$
 [.]code-workspace$
+^codecov\.yml$
