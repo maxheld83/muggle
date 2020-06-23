@@ -21,11 +21,11 @@ install_sysdeps <- function() {
 #' @family computing environment
 #'
 #' @export
-install_deps2 <- function() {
+install_deps2 <- function(dependencies = TRUE) {
   # by default, install_deps does not error out on failed installs, which causes hard to understand downstream problems
   withr::local_options(new = list(warn = 2))
   # ignore, for now, everything that comes with muggle
   # exception, out of necessity, is remotes, which has been installed twice.
   withr::local_libpaths(new = .libPaths()[1])
-  remotes::install_deps(dependencies = TRUE)
+  remotes::install_deps(dependencies = dependencies)
 }

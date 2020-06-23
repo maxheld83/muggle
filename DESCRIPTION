@@ -7,7 +7,7 @@ Authors@R:
              role = c("aut", "cre"),
              email = "info@maxheld.de",
              comment = c(ORCID = "0000-0002-4703-5388")),
-      person(family = "Göttingen State and University Library",
+      person(given = "Göttingen State and University Library",
              role = c("cph", "fnd")))
 Description: What the package does (one paragraph).
 License: MIT + file LICENSE
@@ -30,6 +30,10 @@ Imports:
     remotes (>= 2.1.1),
     testthat (>= 2.3.2),
     glue (>= 1.4.1),
-    covr (>= 3.5.0)
+    covr (>= 3.5.0),
+    pkgdown (>= 1.5.1)
 Remotes:
-    r-hub/sysreqs@f068afa96c2f454a54de0b350800dee7564239df
+    r-hub/sysreqs@f068afa96c2f454a54de0b350800dee7564239df,
+    subugoe/metaR
+Suggests:
+    metaR (>= 0.0.0.9000)

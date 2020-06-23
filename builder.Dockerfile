@@ -37,7 +37,8 @@ RUN options(warn = 2); remotes::install_github('r-hub/sysreqs', ref='f068afa96c2
 RUN system(command = sysreqs::sysreq_commands('DESCRIPTION'))
 
 # install muggle builder R dependencies
-RUN options(warn = 2); remotes::install_deps(dependencies = TRUE)
+# NA is so as to ensure that suggests deps such as metaR are not baked into the builder image
+RUN options(warn = 2); remotes::install_deps(dependencies = NA)
 
 # install muggle into container
 RUN remotes::install_local(upgrade = FALSE)

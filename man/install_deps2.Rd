@@ -4,7 +4,17 @@
 \alias{install_deps2}
 \title{Install package dependencies if needed.}
 \usage{
-install_deps2()
+install_deps2(dependencies = TRUE)
+}
+\arguments{
+\item{dependencies}{Which dependencies do you want to check?
+Can be a character vector (selecting from "Depends", "Imports",
+"LinkingTo", "Suggests", or "Enhances"), or a logical vector.
+
+\code{TRUE} is shorthand for "Depends", "Imports", "LinkingTo" and
+"Suggests". \code{NA} is shorthand for "Depends", "Imports" and "LinkingTo"
+and is the default. \code{FALSE} is shorthand for no dependencies (i.e.
+just check this package, not its dependencies).}
 }
 \description{
 \code{\link[remotes:install_deps]{remotes::install_deps()}} with muggle defaults

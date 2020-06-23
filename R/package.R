@@ -9,6 +9,7 @@
 #' 1. Creates a repo on GitHub and sets it as an origin remote.
 #' 1. Adds a `README.md` via [usethis::use_readme_md()].
 #' 1. Sets up the project for unit tests via [usethis::use_testthat()] and test coverage via [usethis::use_coverage()].
+#' 1. Adds a pkgdown website via [usethis::use_pkgdown()].
 #' 1. Opens the `DESCRIPTION` and `README.md` for additional edits.
 #'
 #' @details # warning
@@ -47,7 +48,7 @@ create_muggle <- function(path,
     rlang::exec(.fn = license, license_holder)
     desc::desc_add_author(family = license_holder)
     # for some reason this needs to be a separate call
-    desc::desc_add_role(role = c("cph", "fnd"), family = license_holder)
+    desc::desc_add_role(role = c("cph", "fnd"), given = license_holder)
   }
 
   # config
@@ -76,12 +77,11 @@ create_muggle <- function(path,
   # usethis::use_testthat() is actually a bad idea because it would pollute the DESCRIPTION
   usethis::use_testthat()
   remove_dep("testthat")
-  usethis::use_codecov()
+  usethis::use_coverage()
   remove_dep("covr")
 
-  # # cleaner to have this in a separate folder
-  # usethis::use_pkgdown(config_file = "pkgdown/_pkgdown.yml")
-
+  # cleaner to have this in a separate folder
+  usethis::use_pkgdown(config_fil = "pkgdown/_pkgdown.yml")
   # usethis::use_spell_check()
 
   # usethis::use_package_doc()
