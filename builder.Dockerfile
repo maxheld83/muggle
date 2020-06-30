@@ -47,6 +47,7 @@ ENV R_LIBS=$R_HOME/library
 # install remotes again so that it lingers with user lib for runtime, necessary for install_deps2
 RUN options(warn = 2); install.packages('remotes')
 
+WORKDIR /
 # set correct order; user (runtime) lib precedes (build-time) site lib
 ENV R_LIBS=$R_HOME/library:$R_LIBS_SITE
 
@@ -55,6 +56,6 @@ ENV R_LIBS=$R_HOME/library:$R_LIBS_SITE
 ONBUILD COPY DESCRIPTION .
 # install runtime sytem dependencies (automatic)
 ONBUILD RUN muggle::install_sysdeps()
-# TODO still need to cache in R dependencies https://github.com/subugoe/muggle/issues/51
 # copy in cache
+ONBUILD COPY .github/library $R_HOME/library
 ONBUILD RUN muggle::install_deps2()

@@ -24,8 +24,21 @@ install_sysdeps <- function() {
 install_deps2 <- function(dependencies = TRUE) {
   # by default, install_deps does not error out on failed installs, which causes hard to understand downstream problems
   withr::local_options(new = list(warn = 2))
+  # just take the first one, should be set correctly in dockerfiles and github actions yaml
+  lib_path_pkg_deps <- .libPaths()[1]
   # ignore, for now, everything that comes with muggle
   # exception, out of necessity, is remotes, which has been installed twice.
   withr::local_libpaths(new = .libPaths()[1])
   remotes::install_deps(dependencies = dependencies)
+
+  # create a copy of the library that is readily inside the docker build context
+  # this seems hacky, but there appears to be no other way short of using / as build context, which would slow down docker builds
+  if (!identical(Sys.getenv("GITHUB_ACTIONS"), "true")) {
+    fs::dir_copy(
+      path = lib_path_pkg_deps,
+      new_path = lib_cache_path,
+      overwrite = TRUE
+    )
+    usethis::ui_done("Copied package dependencies into docker build context path.")
+  }
 }

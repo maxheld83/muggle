@@ -87,9 +87,25 @@ create_muggle <- function(path,
   # usethis::use_package_doc()
   # usethis::use_roxygen_md()
 
+  # set up caching of deps from github actions into container
+  fs::dir_create(path = lib_cache_path)
+  brio::write_lines(
+    text = c("See `help('muggle::lib_cache_path')`"),
+    path = fs::path(lib_cache_path, "README.md")
+  )
+  usethis::ui_done(
+    "Created {usethis::ui_code(lib_cache_path)} to add cached dependencies to docker build context on GitHub actions."
+  )
+
   usethis::ui_todo(x = "Edit the {usethis::ui_code('README.md')}.")
   usethis::edit_file("README.md")
 }
+
+#' Directory for copying dependencies to docker build context
+#'
+#' This directory serves to copy the package cache into the docker build context on GitHub actions."
+#' @keywords internal
+lib_cache_path <- fs::path(".github", "library")
 
 #' Set up vscode inside a package
 #'

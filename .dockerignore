@@ -1,5 +1,6 @@
 .git
 .github
+!.github/library
 .gitignore
 vignettes/
 docs/
