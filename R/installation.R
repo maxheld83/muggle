@@ -1,4 +1,3 @@
-
 #' Install System Dependencies
 #'
 #' Infers and installs system dependencies from `DESCRIPTION` via the [r-hub/sysreqs](https://github.com/r-hub/sysreqs) project.
@@ -33,7 +32,7 @@ install_deps2 <- function(dependencies = TRUE) {
 
   # create a copy of the library that is readily inside the docker build context
   # this seems hacky, but there appears to be no other way short of using / as build context, which would slow down docker builds
-  if (!identical(Sys.getenv("GITHUB_ACTIONS"), "true")) {
+  if (identical(Sys.getenv("GITHUB_ACTIONS"), "true")) {
     fs::dir_copy(
       path = lib_path_pkg_deps,
       new_path = lib_cache_path,
