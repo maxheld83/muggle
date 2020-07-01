@@ -32,7 +32,8 @@ Imports:
     glue (>= 1.4.1),
     covr (>= 3.5.0),
     pkgdown (>= 1.5.1),
-    brio (>= 1.0.0)
+    brio (>= 1.0.0),
+    bookdown (>= 0.20)
 Remotes:
     r-hub/sysreqs@f068afa96c2f454a54de0b350800dee7564239df,
     subugoe/metaR
