@@ -1,24 +1,9 @@
-# TODO setting HTTP user agent is only necessary for rocker
-user_agent <- paste(
-  getRversion(),
-  R.version$platform,
-  R.version$arch,
-  R.version$os
-)
 options(
-  HTTPUserAgent = sprintf(
-    "R/%s R (%s)", getRversion(),
-    user_agent
-  ),
-  download.file.extra = sprintf(
-    "--header \"User-Agent: R (%s)\"",
-    user_agent
-  ),
   repos = c(
     RSPM = paste0(
-      "https://packagemanager.rstudio.com/all/__linux__/bionic/",
+      "https://packagemanager.rstudio.com/all/__linux__/focal/",
       # this freezes the dependencies, see https://github.com/subugoe/muggle/issues/60
-      c(`2020-06-08` = 291)
+      c(`2020-07-06` = 299)
     )
   )
 )

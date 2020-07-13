@@ -1,6 +1,10 @@
-.git
-.github
-!.github/library
-.gitignore
-vignettes/
-docs/
+**
+!/R/**
+!/inst/**
+!/builder_img/**
+!/.github/library/***
+!/DESCRIPTION
+!/NAMESPACE
+!/LICENSE
+!/LICENSE.md
+!/.Rbuildignore
