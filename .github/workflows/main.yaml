@@ -49,8 +49,8 @@ jobs:
         run: muggle::install_sysdeps()
       - name: Install R Dependencies
         env:
-          # need to overwrite R_LIBS_SITE to make sure pkg-specific libraries are installed again for elegant slim multi-stage builds
-          R_LIBS_SITE: .github/library/
+          # see builder.Dockerfile for explanation, this resets after this step
+          R_LIBS_SITE: $R_LIBS_APP_GH
         run: remotes::install_deps(dependencies = TRUE)
       - name: Check
         run: muggle::rcmdcheck2()

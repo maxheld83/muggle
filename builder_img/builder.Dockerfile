@@ -58,7 +58,7 @@ ONBUILD COPY .github/library $R_LIBS_APP_DOCKER
 ONBUILD COPY DESCRIPTION .
 ONBUILD RUN muggle::install_sysdeps()
 # temporarily disable R_LIBS_SITE, so that necessary pkg get installed again
-# this needs to be installed again, is used inside install_deps2()
+# tried doing this via withr::with_env but could not get it to work
 ONBUILD ENV R_LIBS_SITE=$R_LIBS_APP
 ONBUILD RUN install.packages("remotes")
 ONBUILD RUN remotes::install_deps(dependencies = TRUE)
