@@ -49,7 +49,7 @@ jobs:
         run: muggle::install_sysdeps()
       - name: Install R Dependencies
         env:
-          R_LIBS_USER: .github/library/
+          # need to overwrite R_LIBS_SITE to make sure pkg-specific libraries are installed again for elegant slim multi-stage builds
           R_LIBS_SITE: .github/library/
         run: remotes::install_deps(dependencies = TRUE)
       - name: Check

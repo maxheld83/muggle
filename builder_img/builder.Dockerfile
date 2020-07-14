@@ -47,10 +47,13 @@ RUN remotes::install_local(upgrade = FALSE)
 
 WORKDIR /app
 # this is for the deps of the target pkg
-ENV R_LIBS_APP=/tempdir/Library/
+ENV R_LIBS_APP_GH=.github/library/
+ENV R_LIBS_APP_DOCKER=/tempdir/Library/
+ENV R_LIBS_APP=$R_LIBS_APP_GH:$R_LIBS_APP_DOCKER
+# this must include .github location so it is available on github actions
 ENV R_LIBS_USER=$R_LIBS_APP
 # this will also create the target folder
-ONBUILD COPY .github/library $R_LIBS_APP
+ONBUILD COPY .github/library $R_LIBS_APP_DOCKER
 # copy DESCRIPTION separetely so as to only invalidate this expensive step when necessary
 ONBUILD COPY DESCRIPTION .
 ONBUILD RUN muggle::install_sysdeps()
