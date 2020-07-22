@@ -36,7 +36,7 @@ SHELL ["Rscript", "-e"]
 RUN options(warn = 2); remotes::install_github('r-hub/sysreqs', ref='f068afa96c2f454a54de0b350800dee7564239df')
 RUN system(command = sysreqs::sysreq_commands('DESCRIPTION'))
 # install muggle builder R dependencies
-# NA is so as to ensure that suggests deps such as metaR are not baked into the builder image
+# NA is so as to ensure that suggests deps such as metar are not baked into the builder image
 RUN options(warn = 2); remotes::install_deps(dependencies = NA)
 
 # install builder software (needed at build time, not at run time)

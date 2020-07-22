@@ -1,13 +1,16 @@
 # muggle
 
 <!-- badges: start -->
+[![Main](https://github.com/subugoe/muggle/workflows/.github/workflows/main.yaml/badge.svg)](https://github.com/subugoe/muggle/actions)
 [![Codecov test coverage](https://codecov.io/gh/subugoe/muggle/branch/master/graph/badge.svg)](https://codecov.io/gh/subugoe/muggle?branch=master)
+[![CRAN status](https://www.r-pkg.org/badges/version/muggle)](https://CRAN.R-project.org/package=muggle)
+[![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
 <!-- badges: end -->
 
 {muggle} is an R package to implement DevOps best practices for R data products.
 
 {muggle} is developed at the SUB, but can be used by anyone.
-SUB-specific defaults are set in the [{metaR}](http://github.com/subugoe/metaR) package.
+SUB-specific defaults are set in the [{metar}](http://github.com/subugoe/metar) package.
 
 Data products are somewhere between one-off scripts and CRAN-bound packages.
 One the one hand, they are more complex than simple scripts and take longer to build.

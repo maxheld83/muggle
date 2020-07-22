@@ -81,7 +81,7 @@ create_muggle <- function(path,
   remove_dep("covr")
 
   # cleaner to have this in a separate folder
-  usethis::use_pkgdown(config_fil = "pkgdown/_pkgdown.yml")
+  usethis::use_pkgdown(config_file = "pkgdown/_pkgdown.yml")
   # usethis::use_spell_check()
 
   # usethis::use_package_doc()

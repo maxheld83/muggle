@@ -38,7 +38,7 @@ Wraps the following steps, \emph{if the respective files or configuration do not
 \item Sets up package scaffolding via \code{\link[usethis:create_package]{usethis::create_package()}}.
 \item Initialises a git repo via \code{\link[usethis:use_git]{usethis::use_git()}}.
 \item Creates a repo on GitHub and sets it as an origin remote.
-\item Adds a \code{README.md} via \code{\link[usethis:use_readme_md]{usethis::use_readme_md()}}.
+\item Adds a \code{README.md} via \code{\link[usethis:use_readme_rmd]{usethis::use_readme_md()}}.
 \item Sets up the project for unit tests via \code{\link[usethis:use_testthat]{usethis::use_testthat()}} and test coverage via \code{\link[usethis:use_coverage]{usethis::use_coverage()}}.
 \item Adds a pkgdown website via \code{\link[usethis:use_pkgdown]{usethis::use_pkgdown()}}.
 \item Opens the \code{DESCRIPTION} and \code{README.md} for additional edits.
