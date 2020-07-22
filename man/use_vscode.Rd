@@ -13,7 +13,7 @@ use_vscode()
 }
 \seealso{
 Other setup helpers: 
-\code{\link{create_muggle}()},
+\code{\link{create_muggle_package}()},
 \code{\link{use_codecov2}()}
 }
 \concept{setup helpers}
