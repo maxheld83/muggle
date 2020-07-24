@@ -1,6 +1,6 @@
 Package: muggle
 Title: What the Package Does (One Line, Title Case)
-Version: 0.1.0.9000
+Version: 0.1.0-1
 Authors@R:
     c(person(given = "Maximilian",
              family = "Held",
@@ -34,7 +34,9 @@ Imports:
     pkgdown (>= 1.5.1),
     brio (>= 1.0.0),
     bookdown (>= 0.20),
-    devtools (>= 2.3.0)
+    devtools (>= 2.3.0),
+    processx (>= 3.4.3),
+    cli (>= 2.0.2)
 Remotes:
     r-hub/sysreqs@f068afa96c2f454a54de0b350800dee7564239df,
     subugoe/metar@0734d95
