@@ -9,8 +9,17 @@ install_sysdeps <- function() {
   checkmate::assert_file_exists("DESCRIPTION")
   # TODO migrate to rspm db https://github.com/subugoe/muggle/issues/25
   sysdep_cmds <- sysreqs::sysreq_commands("DESCRIPTION")
-  # processx does not work here because it requires cmd and args separately
-  system(
-    command = sysdep_cmds
-  )
+  if (sysdep_cmds == "") {
+    cli::cli_alert_info(
+      "No necessary system dependencies could be found. Skipping."
+    )
+  } else {
+    # processx does not work here because it requires cmd and args separately
+    system(
+      command = sysdep_cmds
+    )
+    cli::cli_alert_success(
+      "System depedencies installed."
+    )
+  }
 }
