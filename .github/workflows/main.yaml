@@ -80,6 +80,25 @@ jobs:
         name: Build Buildtime Image
         with:
           repository: ${{ github.repository }}/muggle-buildtime
+          target: buildtime
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+          registry: docker.pkg.github.com
+          # only necessary here
+          build_args: MUGGLE_BUILDER_TAG=${{ github.sha }}
+          # this will set "latest" if master as per https://github.com/docker/build-push-action
+          tag_with_ref: true
+          # we're relying on long shas only to keep things easy
+          tag_with_sha: false
+          tags: ${{ github.sha }}
+          add_git_labels: true
+          push: ${{ github.event_name != 'pull_request' }}
+      - name: Build Runtime Image
+        # this isn't really needed, just for testing
+        uses: docker/build-push-action@v1
+        with:
+          repository: ${{ github.repository }}/muggle-runtime
+          target: runtime
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
           registry: docker.pkg.github.com

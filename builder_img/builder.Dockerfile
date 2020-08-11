@@ -14,12 +14,15 @@ ENV R_LIBS_BASE=$R_HOME/library/
 # these may not exist yet!
 # install all muggle deps as site-library (this is for builder)
 ENV R_LIBS_BUILDTIME=$R_HOME/site-library
-# this is for runs on gh actions directly
+# this is for runs on gh actions directly, *just* in muggle-buildtime-onbuild, without any of the onbuild instructions firing
+# in this situation, the below copying of R_LIBS_RUNTIME_GH to R_LIBS_RUNTIME_DOCKER does not happen
+# so .github/library must also be on path
 ENV R_LIBS_RUNTIME_GH=.github/library/
-# this is for docker build runs on gh actions
+# this is for docker build runs on gh actions, this is the copy target of above folder
 ENV R_LIBS_RUNTIME_DOCKER=/tempdir/Library/
 # this must include .github location so it is available on github actions
-ENV R_LIBS_RUNTIME=$R_LIBS_APP_RUNTIME:$R_LIBS_APP_RUNTIME
+# not all of these may exist in all runs, so will be inconsequential
+ENV R_LIBS_RUNTIME=$R_LIBS_RUNTIME_DOCKER:$R_LIBS_RUNTIME_GH
 
 # install system dependencies manually
 # TODO these are hacks and should be superseded by https://github.com/subugoe/muggle/issues/25
@@ -72,7 +75,7 @@ WORKDIR /app
 # this is for the deps of the target pkg
 ENV R_LIBS_USER=$R_LIBS_RUNTIME
 # this will also create the target folder
-ONBUILD COPY .github/library $R_LIBS_RUNTIME_DOCKER
+ONBUILD COPY $R_LIBS_RUNTIME_GH $R_LIBS_RUNTIME_DOCKER
 # copy DESCRIPTION separately so as to only invalidate these expensive step when necessary
 ONBUILD COPY DESCRIPTION .
 ONBUILD RUN muggle::install_sysdeps()
@@ -81,7 +84,7 @@ ONBUILD RUN muggle::install_sysdeps()
 ONBUILD ENV R_LIBS_SITE=$R_LIBS_RUNTIME
 ONBUILD RUN remotes::install_deps(dependencies = TRUE)
 # re-enable muggle pkgs
-ONBUILD ENV R_LIBS_SITE=$R_LIBS_MUGGLE
+ONBUILD ENV R_LIBS_SITE=$R_LIBS_BUILDTIME
 ONBUILD COPY . .
 ONBUILD RUN devtools::document()
 ONBUILD RUN remotes::install_local(upgrade = FALSE)
@@ -91,6 +94,5 @@ ONBUILD SHELL ["Rscript", "-e"]
 # sysdeps have to be installed again, because there appears to be no clear way to copy them
 ONBUILD COPY DESCRIPTION .
 ONBUILD RUN system(command = sysreqs::sysreq_commands('DESCRIPTION'))
-ONBUILD COPY --from=buildtime $R_LIBS_RUNTIME_GH $R_LIBS_RUNTIME_GH
 ONBUILD COPY --from=buildtime $R_LIBS_RUNTIME_DOCKER $R_LIBS_RUNTIME_DOCKER
 ONBUILD ENV R_LIBS_USER=$R_LIBS_RUNTIME
