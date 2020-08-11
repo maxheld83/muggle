@@ -5,8 +5,8 @@
 [![Codecov test coverage](https://codecov.io/gh/subugoe/muggle/branch/master/graph/badge.svg)](https://codecov.io/gh/subugoe/muggle?branch=master)
 [![CRAN status](https://www.r-pkg.org/badges/version/muggle)](https://CRAN.R-project.org/package=muggle)
 [![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
-[![muggle-buildtime Docker Pulls](https://img.shields.io/docker/pulls/subugoe/muggle-buildtime-onbuild?label=muggle-buildtime%20docker%20pulls&style=plastic)](https://hub.docker.com/repository/docker/subugoe/muggle-buildtime-onbuild)
-[![muggle-runtime Docker Pulls](https://img.shields.io/docker/pulls/subugoe/muggle-runtime-onbuild?label=muggle-runtime%20docker%20pulls&style=plastic)](https://hub.docker.com/repository/docker/subugoe/muggle-runtime-onbuild)
+[![muggle-buildtime Docker Pulls](https://img.shields.io/docker/pulls/subugoe/muggle-buildtime-onbuild?label=muggle-buildtime%20docker%20pulls&style=flat)](https://hub.docker.com/repository/docker/subugoe/muggle-buildtime-onbuild)
+[![muggle-runtime Docker Pulls](https://img.shields.io/docker/pulls/subugoe/muggle-runtime-onbuild?label=muggle-runtime%20docker%20pulls&style=flat)](https://hub.docker.com/repository/docker/subugoe/muggle-runtime-onbuild)
 <!-- badges: end -->
 
 {muggle} is an R package to implement DevOps best practices for R data products.
