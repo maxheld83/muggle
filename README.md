@@ -9,6 +9,11 @@
 [![muggle-runtime Docker Pulls](https://img.shields.io/docker/pulls/subugoe/muggle-runtime-onbuild?label=muggle-runtime%20docker%20pulls&style=flat)](https://hub.docker.com/repository/docker/subugoe/muggle-runtime-onbuild)
 <!-- badges: end -->
 
+
+## Overview
+
+> Opinionated Devops for R Data Products Strictly Without Magic
+
 {muggle} is an R package to implement DevOps best practices for R data products.
 
 {muggle} is developed at the SUB, but can be used by anyone.
