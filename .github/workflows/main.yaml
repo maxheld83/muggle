@@ -7,17 +7,35 @@ on:
 
 jobs:
   build-onbuild:
-    # this step is only necessary for this image
-    name: Build and Push Onbuild Image
+    # this job is only necessary for this image
+    name: Build and Push Onbuild Images
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v2
-      - uses: docker/build-push-action@v1
+      - name: Build and Push Buildtime Onbuild Image
+        uses: docker/build-push-action@v1
         with:
           # by convention, the same
-          repository: ${{ github.repository }}-onbuild
+          repository: ${{ github.repository }}-buildtime-onbuild
           # must be pushed to docker hub, not docker.pkg.github.com because latter is private, which cannot be used in `container` field.
           dockerfile: builder_img/builder.Dockerfile
+          target: buildtime
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_TOKEN }}
+          # this will set "latest" if master as per https://github.com/docker/build-push-action
+          tag_with_ref: true
+          tag_with_sha: false
+          tags: ${{ github.sha }}
+          add_git_labels: true
+          push: ${{ github.event_name != 'pull_request' }}
+      - name: Build and Push Runtime Onbuild Image
+        uses: docker/build-push-action@v1
+        with:
+          # by convention, the same
+          repository: ${{ github.repository }}-runtime-onbuild
+          # must be pushed to docker hub, not docker.pkg.github.com because latter is private, which cannot be used in `container` field.
+          dockerfile: builder_img/builder.Dockerfile
+          target: buildtime
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_TOKEN }}
           # this will set "latest" if master as per https://github.com/docker/build-push-action
@@ -33,7 +51,7 @@ jobs:
       run:
         shell: Rscript {0}
     # github sha only necessary here
-    container: ${{ github.repository }}-onbuild:${{ github.sha}}
+    container: ${{ github.repository }}-buildtime:${{ github.sha}}
     steps:
       - uses: actions/checkout@v2
       - name: Cache R Packages
@@ -59,9 +77,9 @@ jobs:
       - name: Build Package Website
         run: pkgdown::build_site(override = list(new_process = FALSE))
       - uses: docker/build-push-action@v1
-        name: Build Dev Image
+        name: Build Buildtime Image
         with:
-          repository: ${{ github.repository }}/muggle-dev
+          repository: ${{ github.repository }}/muggle-buildtime
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
           registry: docker.pkg.github.com

@@ -8,9 +8,5 @@ Dockerfile
 ^_pkgdown\.yml$
 ^docs$
 ^pkgdown$
-^pkgdown/_pkgdown\.yml$
-^muggle\.Rproj$
-^\.Rproj\.user$
-^FALSE$
 [.]code-workspace$
 ^codecov\.yml$

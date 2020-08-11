@@ -1,8 +1,8 @@
 **
 !/R/**
 !/inst/**
-!/builder_img/**
 !/.github/library/***
+!/builder_img/**
 !/DESCRIPTION
 !/NAMESPACE
 !/LICENSE
