@@ -51,7 +51,7 @@ jobs:
       run:
         shell: Rscript {0}
     # github sha only necessary here
-    container: ${{ github.repository }}-buildtime:${{ github.sha}}
+    container: ${{ github.repository }}-buildtime-onbuild:${{ github.sha}}
     steps:
       - uses: actions/checkout@v2
       - name: Cache R Packages
