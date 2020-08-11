@@ -3,7 +3,7 @@ options(
     RSPM = paste0(
       "https://packagemanager.rstudio.com/all/__linux__/focal/",
       # this freezes the dependencies, see https://github.com/subugoe/muggle/issues/60
-      c(`2020-07-06` = 299)
+      c(`2020-08-10` = 309)
     )
   )
 )
