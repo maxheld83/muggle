@@ -68,7 +68,7 @@ jobs:
       - name: Install R Dependencies
         env:
           # see builder.Dockerfile for explanation, this resets after this step
-          R_LIBS_SITE: $R_LIBS_APP_GH
+          R_LIBS_SITE: $R_LIBS_RUNTIME_GH
         run: remotes::install_deps(dependencies = TRUE)
       - name: Check
         run: muggle::rcmdcheck2()
