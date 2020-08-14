@@ -6,3 +6,6 @@ authors:
     href: https://www.sub.uni-goettingen.de/
 template:
   package: subugoetheme
+  docsearch:
+    api_key: 6210bf760111eb2d7173ad99203499e2
+    index_name: subugoe_muggle
