@@ -20,7 +20,7 @@ BugReports: https://github.com/subugoe/muggle/issues
 Imports:
     usethis (>= 1.6.1),
     checkmate (>= 2.0.0),
-    rlang (>= 0.4.6),
+    rlang (>= 0.4.7),
     gert (>= 0.3),
     fs (>= 1.4.1),
     desc (>= 1.2.0),
@@ -37,7 +37,8 @@ Imports:
     devtools (>= 2.3.0),
     processx (>= 3.4.3),
     cli (>= 2.0.2),
-    shinycaas
+    shinycaas,
+    gh (>= 1.1.0)
 Suggests:
     subugoetheme
 Remotes:
