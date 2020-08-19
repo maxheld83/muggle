@@ -40,7 +40,8 @@ Imports:
     shinycaas,
     gh (>= 1.1.0)
 Suggests:
-    subugoetheme
+    subugoetheme,
+    shiny (>= 1.5.0)
 Remotes:
     r-hub/sysreqs@f068afa96c2f454a54de0b350800dee7564239df,
     subugoe/subugoetheme@1.0.0,

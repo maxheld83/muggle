@@ -10,3 +10,4 @@ Dockerfile
 ^pkgdown$
 [.]code-workspace$
 ^codecov\.yml$
+^vignettes/
