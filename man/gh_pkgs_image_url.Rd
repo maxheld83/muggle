@@ -9,7 +9,7 @@
 gh_pkgs_image_url(
   image_name = gh_pkgs_image_name(target = "runtime"),
   version = gh_pkgs_image_version(),
-  repo_spec = repo_spec()
+  repo_spec = gh_repo_spec()
 )
 
 gh_pkgs_image_name(target = c("buildtime", "runtime"))

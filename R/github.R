@@ -19,7 +19,7 @@
 #' @export
 gh_pkgs_image_url <- function(image_name = gh_pkgs_image_name(target = "runtime"),
                               version = gh_pkgs_image_version(),
-                              repo_spec = repo_spec()) {
+                              repo_spec = gh_repo_spec()) {
   paste(
     "docker.pkg.github.com",
     repo_spec,
@@ -63,7 +63,7 @@ gh_pkgs_image_version <- function() {
 #' @family GitHub helpers
 #'
 #' @export
-repo_spec <- function() {
+gh_repo_spec <- function() {
   # something like this already exists in usethis, but seems unexported
   # muggle image *has* git, and on gh actions should also have a repo
   # but this will not work in a local docker container, which has git, but no repo
