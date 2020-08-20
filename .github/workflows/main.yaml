@@ -111,12 +111,6 @@ jobs:
           tags: ${{ github.sha }}
           add_git_labels: true
           push: ${{ github.event_name != 'pull_request' }}
-      - name: Deploy to GitHub Pages
-        if: github.ref == 'refs/heads/master'
-        uses: maxheld83/ghpages@github-token
-        env:
-          BUILD_DIR: docs
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Log in to Azure
         uses: azure/login@v1.1
         with:
@@ -131,9 +125,9 @@ jobs:
             resource_group = "hoad",
             subscription = "f0dd3a37-0a4e-4e7f-9c9b-cb9f60146edc"
           )
-  sleep:
-    name: Sleep to let GITHUB_TOKEN persist
-    needs: CICD
-    runs-on: ubuntu-20.04
-    steps:
-      - run: sleep 3m
+      - name: Deploy to GitHub Pages
+        if: github.ref == 'refs/heads/master'
+        uses: maxheld83/ghpages@github-token
+        env:
+          BUILD_DIR: docs
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
