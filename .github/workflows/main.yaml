@@ -124,7 +124,13 @@ jobs:
       - name: Deploy to Azure Webapps
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: muggle::az_webapp_config_muggle(name = "shiny-text", plan = "hoad", resource_group = "hoad", subscription = "f0dd3a37-0a4e-4e7f-9c9b-cb9f60146edc")
+        run: |
+          muggle::az_webapp_config_muggle(
+            name = "shiny-text",
+            plan = "hoad",
+            resource_group = "hoad",
+            subscription = "f0dd3a37-0a4e-4e7f-9c9b-cb9f60146edc"
+          )
   sleep:
     name: Sleep to let GITHUB_TOKEN persist
     needs: CICD
