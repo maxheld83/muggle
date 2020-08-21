@@ -5,7 +5,7 @@
 \title{Deploy a shiny app to \href{https://azure.microsoft.com/en-us/services/app-service/containers/}{Microsoft Azure Web Apps for Containers}}
 \usage{
 az_webapp_config_muggle(
-  name = utils::packageName(),
+  name = Sys.getenv("MUGGLE_PKG_NAME"),
   plan,
   resource_group,
   subscription,

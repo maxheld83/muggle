@@ -33,7 +33,7 @@
 #'    It remains to be seen how common this problem is.
 #'
 #' @export
-az_webapp_config_muggle <- function(name = utils::packageName(),
+az_webapp_config_muggle <- function(name = Sys.getenv("MUGGLE_PKG_NAME"),
                                     plan,
                                     resource_group,
                                     subscription,

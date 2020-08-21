@@ -12,8 +12,6 @@ jobs:
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v2
-      - run: echo ${{ github.event }}
-      - run: echo ${{ github.event.repository.name }}
       - name: Build and Push Buildtime Onbuild Image
         uses: docker/build-push-action@v1
         with:
@@ -49,6 +47,9 @@ jobs:
   CICD:
     needs: build-onbuild
     runs-on: ubuntu-20.04
+    env:
+      MUGGLE_PKG_NAME: ${{ github.event.repository.name }}
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     defaults:
       run:
         shell: Rscript {0}
@@ -63,8 +64,9 @@ jobs:
           # unfortunately cannot retrieve this programmatically without a separate step read out env var or installing github action npm to image
           path: ".github/library"
           # querying dependencies against CRAN is unnecessary, because they are all locked down via RSPM
-          # TODO use job.container here elsewhere for other packages
-          key: ${{ hashFiles('DESCRIPTION') }}
+          # use job.container here elsewhere for other packages
+          # cache also needs to be invalidated on changed snapshot in rprofile
+          key: $${{ hashFiles('builder_img/Rprofile.site') }}-$${{ hashFiles('DESCRIPTION') }}
       - name: Install System Dependencies
         run: muggle::install_sysdeps()
       - name: Install R Dependencies
@@ -81,7 +83,7 @@ jobs:
       - uses: docker/build-push-action@v1
         name: Build Buildtime Image
         with:
-          repository: ${{ github.repository }}/muggle-buildtime
+          repository: ${{ github.repository }}/${{ env.MUGGLE_PKG_NAME }}-buildtime
           target: buildtime
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
@@ -99,7 +101,7 @@ jobs:
         # this isn't really needed, just for testing
         uses: docker/build-push-action@v1
         with:
-          repository: ${{ github.repository }}/muggle-runtime
+          repository: ${{ github.repository }}/${{ env.MUGGLE_PKG_NAME }}-runtime
           target: runtime
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
@@ -118,8 +120,6 @@ jobs:
         with:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
       - name: Deploy to Azure Webapps
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           muggle::az_webapp_config_muggle(
             name = "shiny-text",
@@ -132,4 +132,3 @@ jobs:
         uses: maxheld83/ghpages@github-token
         env:
           BUILD_DIR: docs
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

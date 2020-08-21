@@ -37,7 +37,7 @@ gh_pkgs_image_url <- function(image_name = gh_pkgs_image_name(target = "runtime"
 #' @export
 gh_pkgs_image_name <- function(target = c("buildtime", "runtime")) {
   target <- rlang::arg_match(target)
-  paste0(utils::packageName(), "-", target)
+  paste0(Sys.getenv("MUGGLE_PKG_NAME"), "-", target)
 }
 
 #' @describeIn gh_pkgs_image_url
