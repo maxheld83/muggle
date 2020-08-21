@@ -4,6 +4,8 @@ FROM rstudio/r-base:4.0.2-focal AS base
 # below have to be in sync with above base image
 # there seems to be no better way; cannot persist env vars based on running scripts
 ENV R_HOME="/opt/R/4.0.2/lib/R"
+# this freezes r dependencies see https://github.com/subugoe/muggle/issues/60
+ENV RSPM="https://packagemanager.rstudio.com/all/__linux__/focal/311"
 # TODO remove when migrated to rspm https://github.com/subugoe/muggle/issues/25
 ENV RHUB_PLATFORM="linux-x86_64-ubuntu-gcc"
 # just FYI; this is were base pkg live, they are always available
@@ -32,7 +34,7 @@ RUN apt-get update && apt-get install -y \
   # TODO hack for missing time zone data base, bug in rocker?
   tzdata
 
-# freeze R dependencies
+# this brings above env var in effect to freeze dependencies
 COPY builder_img/Rprofile.site $R_HOME/etc/Rprofile.site
 # install some R things needed for all targets
 SHELL ["Rscript", "-e"]

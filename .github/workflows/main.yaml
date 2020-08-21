@@ -65,8 +65,8 @@ jobs:
           path: ".github/library"
           # querying dependencies against CRAN is unnecessary, because they are all locked down via RSPM
           # use job.container here elsewhere for other packages
-          # cache also needs to be invalidated on changed snapshot in rprofile
-          key: $${{ hashFiles('builder_img/Rprofile.site') }}-$${{ hashFiles('DESCRIPTION') }}
+          # note there is never a need to invalidate the cache for changes in the upstream builder.Dockerfile or RSPM snapshot, because those are already in the container: above
+          key: $${{ hashFiles('DESCRIPTION') }}
       - name: Install System Dependencies
         run: muggle::install_sysdeps()
       - name: Install R Dependencies
