@@ -75,7 +75,7 @@ jobs:
           R_LIBS_SITE: $R_LIBS_RUNTIME_GH
         run: remotes::install_deps(dependencies = TRUE)
       - name: Check
-        run: muggle::rcmdcheck2()
+        run: devtools::check()
       - name: Test Coverage
         run: covr::codecov()
       - name: Build Package Website

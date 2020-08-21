@@ -37,15 +37,3 @@ remove_dep <- function(x) {
 use_package2 <- function(package, type = "Imports") {
   usethis::use_package(package = package, type = type, min_version = TRUE)
 }
-
-#' @inherit rcmdcheck::rcmdcheck
-#' @description [rcmdcheck::rcmdcheck()] with muggle defaults
-#' @family helpers for repeated non-interactive use
-#' @export
-rcmdcheck2 <- function(error_on = "warning") {
-  withr::local_envvar(c(`_R_CHECK_CRAN_INCOMING_` = FALSE))
-  rcmdcheck::rcmdcheck(
-    args = c("--no-manual", "--as-cran"),
-    check_dir = "check"
-  )
-}
