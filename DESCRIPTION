@@ -27,7 +27,6 @@ Imports:
     withr (>= 2.2.0),
     sysreqs (>= 1.0.0.9000),
     remotes (>= 2.1.1),
-    testthat (>= 2.3.2),
     glue (>= 1.4.1),
     covr (>= 3.5.0),
     pkgdown (>= 1.5.1),
@@ -39,6 +38,7 @@ Imports:
     shinycaas,
     gh (>= 1.1.0)
 Suggests:
+    testthat (>= 2.3.2),
     subugoetheme,
     shiny (>= 1.5.0)
 Remotes:
