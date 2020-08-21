@@ -12,6 +12,8 @@ jobs:
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v2
+      - run: echo ${{ github.event }}
+      - run: echo ${{ github.event.repository.name }}
       - name: Build and Push Buildtime Onbuild Image
         uses: docker/build-push-action@v1
         with:
