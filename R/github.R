@@ -14,7 +14,7 @@
 #'
 #' @return character string
 #'
-#' @family GitHub Packages
+#' @family compute environment functions
 #'
 #' @export
 gh_pkgs_image_url <- function(image_name = gh_pkgs_image_name(target = "runtime"),
@@ -59,8 +59,6 @@ gh_pkgs_image_version <- function() {
 #' Wraps [gh::gh_tree_remote()].
 #'
 #' @keywords internal
-#'
-#' @family GitHub helpers
 #'
 #' @export
 gh_repo_spec <- function() {

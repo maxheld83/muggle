@@ -9,5 +9,4 @@ gh_repo_spec()
 \description{
 Wraps \code{\link[gh:gh_tree_remote]{gh::gh_tree_remote()}}.
 }
-\concept{GitHub helpers}
 \keyword{internal}

@@ -44,4 +44,10 @@ These \code{IMAGE_NAME}s are immutable (cannot be changed nor deleted) and must 
 \item \code{gh_pkgs_image_version}: Get the sha of the \emph{latest} \verb{git commit} if on GitHub Actions, or the \emph{head} reference (the branch or tag) otherwise (not recommended for reproducibility).
 }}
 
-\concept{GitHub Packages}
+\seealso{
+Other compute environment functions: 
+\code{\link{install_sysdeps}()},
+\code{\link{lib_cache_path}},
+\code{\link{use_onbuild_image}()}
+}
+\concept{compute environment functions}

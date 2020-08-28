@@ -10,6 +10,35 @@ template:
     docsearch:
       api_key: 6210bf760111eb2d7173ad99203499e2
       index_name: subugoe_muggle
+reference:
+- title: Setup and Update
+  desc: >
+    Wraps all of the below functions.
+- contents:
+  - has_concept("setup functions")
+- subtitle: Package Structure
+  desc: >
+    Add a `DESCRIPTION`, folder structure and other scaffolding for an R package.
+- subtitle: Compute Environment
+  desc: >
+   `Dockerfile` to specify the compute environment and related helpers.
+- contents:
+  - has_concept("compute environment functions")
+- subtitle: Editor and IDE
+  desc: >
+   Setting up RStudio and vscode.
+- contents:
+  - has_concept("editor functions")
+- subtitle: Testing
+  desc: >
+    Set up unit testing.
+- contents:
+  - has_concept("testing functions")
+- subtitle: Deployment
+  desc: >
+    Deploy muggle projects to the public cloud.
+- contents:
+  - has_concept("deployment functions")
 articles:
   - title: Example App
     navbar: Example App

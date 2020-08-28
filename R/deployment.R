@@ -32,6 +32,8 @@
 #'    Only a new workflow run can heal the app in this scenario.
 #'    It remains to be seen how common this problem is.
 #'
+#' @family deployment functions
+#'
 #' @export
 az_webapp_config_muggle <- function(name = Sys.getenv("MUGGLE_PKG_NAME"),
                                     plan,
