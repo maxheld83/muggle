@@ -1,5 +1,6 @@
 ---
 title: "shiny-text"
+description: "A shiny app running inside Microsoft Azure Web App for Containers"
 ---
 
 ```{r echo=FALSE}

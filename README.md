@@ -12,7 +12,7 @@
 
 ## Overview
 
-> Opinionated Devops for R Data Products Strictly Without Magic
+> Reproducible DevOps Strictly Without Magic
 
 {muggle} is an R package to implement DevOps best practices for R data products.
 

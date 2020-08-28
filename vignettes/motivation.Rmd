@@ -1,0 +1,17 @@
+---
+title: "Bridging the Unproductive Valley"
+subtitle: "foo"
+description: "Transitioning Small and Medium-Sized Teams from One-Off Reports to Data Products"
+author: "Max Held"
+date: "First published 2020-08, last updated `r Sys.Date()`"
+---
+
+## Abstract
+
+Between GUI-based reports and scripted data science lies an unproductive valley that combines the worst of both worlds:
+poor scaleability and high overhead.
+To avoid getting stuck there, small and medium-sized teams must build strategic data products (not one-off scripts) and concentrate on business value (not infrastructure).
+
+{muggle}'s opininated DevOps help with this transition.
+It standardises the compute environment in development, testing and deployment on a multi-stage `Dockerfile` with `ONBUILD` triggers for lightweight target images and leverages public cloud services (RSPM, GitHub Actions, GitHub Packages).
+In contrast to some existing approaches, {muggle} never infers developer intent and has a minimal git footprint.

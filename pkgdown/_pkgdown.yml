@@ -40,8 +40,15 @@ reference:
 - contents:
   - has_concept("deployment functions")
 articles:
-  - title: Example App
-    navbar: Example App
-    description: Shiny app used for testing.
-    contents:
-      - shiny-text
+- title: Background
+  navbar: Background
+  desc: >
+    Why yet another workflow package?
+  contents:
+    - motivation
+- title: Example Deployments
+  navbar: Example Deployments
+  desc: >
+    Example deployments based on `muggle-runtime` images.
+  contents:
+    - shiny-text
