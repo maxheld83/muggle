@@ -44,4 +44,4 @@ Suggests:
 Remotes:
     r-hub/sysreqs@f068afa96c2f454a54de0b350800dee7564239df,
     subugoe/subugoetheme@1.0.0,
-    subugoe/shinycaas
+    subugoe/shinycaas@551e261df98a079d2fe0aaa820b8371c7e42422c
