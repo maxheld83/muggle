@@ -15,3 +15,47 @@ To avoid getting stuck there, small and medium-sized teams must build strategic 
 {muggle}'s opininated DevOps help with this transition.
 It standardises the compute environment in development, testing and deployment on a multi-stage `Dockerfile` with `ONBUILD` triggers for lightweight target images and leverages public cloud services (RSPM, GitHub Actions, GitHub Packages).
 In contrast to some existing approaches, {muggle} never infers developer intent and has a minimal git footprint.
+
+<!---
+
+## Notes
+
+Hi, I'm Max, I'm a social scientist, and for the past 6 years, I've worked as an R developer and data analyst in small and medium sized teams, in research and public administration.
+
+Bringing R to these organisations has not, to be honest, been an unqualified success.
+Often, we would get stuck somewhere in the middle between point-and-click-based reports and proper scripted data science.
+We'd end up with the worst of both worlds:
+we'd have the poor scaleability and reproducibility of excel but the upfront time investment of R.
+That could become quite frustrating: Stakeholders would be unhappy because the ad-hoc reports they wanted were slow to materialise, and the analysts would be context switching like mad, ammassing technical debt and in the worst case, never achieving the promised reproducibility and scaleability of open source data science.
+
+Now, I think teams and organisation *must* transition to scripted data science, if they don't want to concede this area of value generation to others.
+But, without a proper setup, and in the short term, the honest answer has been that often, excel would get the job done better.
+
+Over the past nine months, I've tried out a new approach with my team at the State- and University Library Göttingen, Germany, where we do bibliometric data analytics.
+I think we've found two ways to bridge this unproductive valley from GUI to scripts.
+
+First, we have strategically realigned our work around building data products.
+That is, we try not to worry about any particular report, but instead on the data APIs, ETL pipelines and visualisations that were central to our mission, and then recycle and resurface those in various outputs.
+Building these data products as R packages has been a useful heuristic.
+Internally, it forced us not only to build better APIs and more tests, but more importantly, even a small thing as writing down the roxygen2 comments for a function would slow us down and make us thing harder about whether, and what we really needed.
+Externally an R package with a corresponding pkgdown site has also helped us to make this kind of "backend" work more visible to our stakeholders.
+It was just kind of nice to show them our tidy data API in pkgdown, which I think made them understand a little better what we do.
+
+Secondly, we've revamped our DevOps and try to standardise and abstract away as much of the infrastructure as we can.
+This was also a big pain point previously, because in this middle ground of "somewhat reproducible", synchronising the different environments between development, testing and deployment can be a huge timesink, which we couldn't afford.
+We've build the muggle package for this purpose.
+The package combines Docker multi-stage builds, on-build triggers, the RSPM snapshotted binaries, GitHub Actions and GitHub Packages to allow users to build a completely locked-down, reproducible compute environment by adding a 2-line `Dockerfile`.
+The different build targets can then be used locally in development, in testing, and in deployment, say to host a shiny app on Azure Webapp for Containers -- all in the exact same compute environment.
+Now we know there's already many approaches to do this kind of thing out there, many much more mature than muggle.
+We think our approach may be worth it, because we optimise for speed, we religiously try not to layer on complexity or be too clever.
+For example, depending on the build target, our images are about a tenth of some of the commonly used rocker images, so they can realistically be used in production, which we do.
+We also never infer anything about the developers intent from the code and we never commit on behalf of the developer, or add much boilerplate code to the target repos.
+
+I've heard this neat story that when electrification came around, it took a generation of managers before steam power was replaced in factories, because the whole shopfloor needed to be reorganized around electricity, which could be used much more flexibly.
+I think in the same way, scripted data science for small and medium-sized teams is not a plug-and play solution.
+
+We've learned to lessons which we'd like to share:
+
+- You need some mental scaffolding like an R package to transition from a report-mindset to a data-product-mindset
+- You need rigorous standardising around infrastructure, which you should entirely abstract away into separate software, rather than guide the developers hand, so to speak.
+-->
