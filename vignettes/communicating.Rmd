@@ -1,0 +1,56 @@
+---
+title: "Communicating"
+subtitle: "Getting Your Results Out There"
+author: "Max Held"
+---
+
+## Citations
+
+### Citing Others
+
+To cite other works, rely on the default helper program [citeproc](https://github.com/jgm/citeproc) which is used in pandoc, and, in turn by many rmarkdown formats, including pkgdown vignettes.
+If you rely on academic citation, you might want to *only* render to rmarkdown output formats which use pandoc, and therefore citeproc, under the hood.
+
+Using citeproc inside rmarkdown documents is documented [here](https://rmarkdown.rstudio.com/authoring_bibliographies_and_citations.html) and [https://bookdown.org/yihui/bookdown/citations.html].
+
+Your `*.bib` (or `*.json`) files should be `git commit`ted with the rest of your code.
+To keep `git diff`s informative, you should only commit entries which you are actually citing -- don't commit your *entire* library.
+
+The path passed to the YAML frontmatter field `bibliography: ` should be relative from the directory where you are running `rmarkdown::render()` (and friends).
+In a pkgdown vignette or article, this will be `vignettes/`.
+
+Committing the `*.bib` file is arguably in violation of the muggle dictum to avoid derivative files:
+your intent is to *cite*, say [`Fenner_2012`](https://www.nature.com/articles/nmat3283), not the pages, journal, or other metadata of that article.
+Given a [DOI](https://en.wikipedia.org/wiki/Digital_object_identifier), all additional metadata are superfluous.
+DOIs are, however, not very human readable, and we thus need a dictionary that maps our (human-readable, local) citekeys (`Fenner_2012`) to its metadata -- that's your `*.bib`.
+If you're adventurous and have a great memory for DOIs, check out [knitcitations](https://github.com/cboettig/knitcitations) or [pandoc-url2cite](https://github.com/phiresky/pandoc-url2cite) both of which actually let you use DOIs directly in intext citations.
+
+
+#### Zotero
+
+The [Zotero](https://www.zotero.org) is a frequently used open-source reference manager.
+As many programs, it can export the required `*.bib` files, but there are some *gotchas* to consider.
+
+Zotero does *not* natively store the citekeys (say, `Newton_1728`) on which citeproc relies.
+Instead, out of the box, Zotero will generate these citekeys anew on every export.
+As such, the citekeys can change between exports, depending on the software version and settings as well as the underlying data.
+
+It should be noted that while frustrating, this behavior makes sense in principle:
+citekeys are merely an arbitrary user interface for plain-text editing.
+They are not proper resource identifiers, such as DOI.
+
+Unfortunately, if you are collaborating with others (or future selves), changing citekeys can cause major problems:
+You'll suddenly have missing bibliography entries, and may have to hunt through your source, replacing the citekeys.
+
+The [better bibtex](https://retorque.re/zotero-better-bibtex/) plugin for Zotero fixes this problem, along with offering other features and conveniences.
+It [generates citekeys](https://retorque.re/zotero-better-bibtex/citing/) for you, and, crucially, allows you to *pin* these citekeys, i.e. it lets you store *once*-generated citekeys inside your Zotero database (as additional metadata).
+This ensures that citekeys stay the same.
+
+To store such static citekeys in your Zotero database, select your new or yet-unpinned citations in Zotero and click "Pin BibTeX key":
+
+```{r pin, echo = FALSE, fig.cap="Pinning Citekeys"}
+knitr::include_graphics(path = "communicating/pin.png")
+```
+
+better bibtex also allows you to *automatically* update an exported `*.bib` when Zotero detects changes.
+This can be very convenient, and will even usually create tight `git diff`s.

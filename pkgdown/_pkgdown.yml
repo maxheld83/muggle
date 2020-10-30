@@ -46,6 +46,12 @@ articles:
     Why yet another workflow package?
   contents:
     - motivation
+- title: Process
+  navbar: Process
+  desc: >
+    Steps of the Data Science Process
+  contents:
+     - communicating
 - title: Example Deployments
   navbar: Example Deployments
   desc: >
