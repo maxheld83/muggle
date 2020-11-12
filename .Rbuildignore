@@ -8,7 +8,6 @@ Dockerfile
 ^_pkgdown\.yml$
 ^docs$
 ^pkgdown$
-[.]code-workspace$
 ^codecov\.yml$
 ^vignettes/
 ^vignettes/articles$

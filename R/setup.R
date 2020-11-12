@@ -5,7 +5,7 @@
 #' Wraps the following steps, *if the respective files or configuration do not already exist*:
 #'
 #' 1. **Package Structure**: Sets up scaffolding via [usethis::create_package()] and asks the user to complete the `DESCRIPTION`.
-#' 1. **Editors/IDEs**: Sets up [vscode](http://code.visualstudio.com) ([use_vscode()]) and RStudio as editors.
+#' 1. **Editors/IDEs**: Sets up [vscode](http://code.visualstudio.com) and RStudio as editors.
 #' 1. **Git/GitHub**: Initialises a git repo via [usethis::use_git()], creates a repo on GitHub and sets it as an origin remote.
 #' 1. **README**: Adds a `README.md` via [usethis::use_readme_md()] and asks the user to complete it.
 #' 1. **Testing**: Sets up the project for unit tests via [usethis::use_testthat()] and test coverage via [usethis::use_coverage()].
@@ -55,9 +55,6 @@ create_muggle_package <- function(path,
   }
   # configure to never save/load Rdata
   usethis::use_blank_slate("project")
-
-  # editors / ide ====
-  use_vscode()
 
   # git/github ====
   usethis::use_git()

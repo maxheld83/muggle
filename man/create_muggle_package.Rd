@@ -36,7 +36,7 @@ Set up, or migrate to a muggle project.
 Wraps the following steps, \emph{if the respective files or configuration do not already exist}:
 \enumerate{
 \item \strong{Package Structure}: Sets up scaffolding via \code{\link[usethis:create_package]{usethis::create_package()}} and asks the user to complete the \code{DESCRIPTION}.
-\item \strong{Editors/IDEs}: Sets up \href{http://code.visualstudio.com}{vscode} (\code{\link[=use_vscode]{use_vscode()}}) and RStudio as editors.
+\item \strong{Editors/IDEs}: Sets up \href{http://code.visualstudio.com}{vscode} and RStudio as editors.
 \item \strong{Git/GitHub}: Initialises a git repo via \code{\link[usethis:use_git]{usethis::use_git()}}, creates a repo on GitHub and sets it as an origin remote.
 \item \strong{README}: Adds a \code{README.md} via \code{\link[usethis:use_readme_rmd]{usethis::use_readme_md()}} and asks the user to complete it.
 \item \strong{Testing}: Sets up the project for unit tests via \code{\link[usethis:use_testthat]{usethis::use_testthat()}} and test coverage via \code{\link[usethis:use_coverage]{usethis::use_coverage()}}.
