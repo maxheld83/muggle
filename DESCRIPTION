@@ -43,5 +43,5 @@ Suggests:
     shiny (>= 1.5.0)
 Remotes:
     r-hub/sysreqs@f068afa96c2f454a54de0b350800dee7564239df,
-    subugoe/subugoetheme@1.0.0,
+    subugoe/subugoetheme@7ee0331ed9f56a642247d3c3b6477ab08f96b364,
     subugoe/shinycaas@551e261df98a079d2fe0aaa820b8371c7e42422c
