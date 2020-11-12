@@ -1,0 +1,125 @@
+# Test Content
+
+<h2 data-toc-skip> A `data-toc-skip`ped Section</h2>
+
+```html
+<h2 data-toc-skip> A `data-toc-skip`ped Section</h2>
+```
+
+Pkgdown currently does not support omitting arbitrary headings from the table of contents (TOC) in a documented way (see [#1430](https://github.com/r-lib/pkgdown/issues/1430)).
+As a hack-job, you can pass a data attribute to the heading in plain HTML, which will be picked up by bootstrap-toc.
+Remember that depends on the current implementation of pkgdown and may break without notice.
+
+This chunk produces the above heading skipped from the TOC.
+
+## Selected Bootstrap Features
+
+You can use [components from bootstrap 3.4.1](https://getbootstrap.com/docs/3.4/components/) for additional styling in vignettes and other sites.
+You can write this in plain HTML, which gets passed on through to the final website unchanged.
+
+### Labels
+
+```html
+<span class="label label-default">Default</span>
+<span class="label label-primary">Primary</span>
+<span class="label label-success">Success</span>
+<span class="label label-info">Info</span>
+<span class="label label-warning">Warning</span>
+<span class="label label-danger">Danger</span>
+```
+<span class="label label-default">Default</span>
+<span class="label label-primary">Primary</span>
+<span class="label label-success">Success</span>
+<span class="label label-info">Info</span>
+<span class="label label-warning">Warning</span>
+<span class="label label-danger">Danger</span>
+
+### Jumbotron
+
+```html
+<div class="jumbotron">
+  <h1 data-toc-skip>Hello, world!</h1>
+  <p>
+    This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.
+  </p>
+  <p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a></p>
+</div>
+```
+
+<div class="jumbotron">
+  <h1 data-toc-skip>Hello, world!</h1>
+  <p>
+    This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.
+  </p>
+  <p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a></p>
+</div>
+
+### Alerts
+
+```html
+<div class="alert alert-success" role="alert">
+  <strong>Well done!</strong>
+  You successfully read this important alert message.
+</div>
+```
+
+<div class="alert alert-success" role="alert">
+  <strong>Well done!</strong>
+  You successfully read this important alert message.
+</div>
+
+The alert can also be dismissible.
+
+```html
+<div class="alert alert-warning alert-dismissible" role="alert">
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+  <strong>Warning!</strong> Better check yourself, you're not looking too good.
+</div>>
+```
+
+<div class="alert alert-warning alert-dismissible" role="alert">
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+  <strong>Warning!</strong> Better check yourself, you're not looking too good.
+</div>
+
+### A Section with a Bootstrap Class {.alert .alert-danger}
+
+```md
+### A Section with a Bootstrap Class {.alert .alert-danger}
+```
+
+### Panels
+
+```html
+<div class="panel panel-primary">
+  <div class="panel-heading">Panel heading</div>
+  <div class="panel-body">
+    Markdown support inside HTML is *disabled* in the muggle vignette.
+  </div>
+  <div class="panel-footer">Panel footer</div>
+</div>
+```
+
+<div class="panel panel-primary">
+  <div class="panel-heading">Panel heading</div>
+  <div class="panel-body">
+    Markdown support inside HTML is *disabled* in the muggle vignette.
+  </div>
+  <div class="panel-footer">Panel footer</div>
+</div>
+
+### A Leading Paragraph
+
+```html
+<p class="lead">
+  Fermentum iaculis eu non diam phasellus vestibulum lorem
+</p>
+```
+
+<p class="lead">
+  Fermentum iaculis eu non diam phasellus vestibulum lorem
+</p>

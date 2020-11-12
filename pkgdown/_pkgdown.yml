@@ -45,16 +45,15 @@ articles:
   desc: >
     Why yet another workflow package?
   contents:
-    - motivation
+  - motivation
 - title: Process
   navbar: Process
   desc: >
     Steps of the Data Science Process
   contents:
-     - communicating
-- title: Example Deployments
-  navbar: Example Deployments
-  desc: >
-    Example deployments based on `muggle-runtime` images.
+  - communicating
+- title: Example Outputs
   contents:
-    - shiny-text
+  - vignette-pkgdown
+  - vignette-muggle
+  - shiny-text

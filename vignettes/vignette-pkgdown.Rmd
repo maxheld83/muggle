@@ -1,0 +1,10 @@
+---
+title: "Vignette (pkgdown default)"
+subtitle: "Vignette based on `rmarkdown::html_document()`"
+author: "Max Held"
+---
+
+This just tests default pkgdown behavior for comparison.
+
+```{r, child=system.file("formatting.Rmd", package = "muggle")}
+```

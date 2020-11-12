@@ -1,0 +1,15 @@
+---
+title: "Vignette (muggle default)"
+subtitle: "Vignette based on `bookdown::html_document2()`"
+pkgdown:
+  as_is: true
+---
+
+By default, pkgdown builds vignettes (or rather, articles) using a special format based on `rmarkdown::html_document()`.
+This format does not include the automatic numbering and crossreferencing of figures, tables, equations, and (for cross-references) sections supported by [bookdown](http://bookdown.org).
+The [`bookdown::html_document2()`](https://bookdown.org/yihui/bookdown/a-single-document.html) render function backports these features for uses outside of bookdown.
+
+This vignettes documents how you can use `bookdown::html_document2()` and tests its compatibility with the subugoetheme against the default.
+
+```{r, child=system.file("formatting.Rmd", package = "muggle")}
+```

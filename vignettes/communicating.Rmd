@@ -2,6 +2,8 @@
 title: "Communicating"
 subtitle: "Getting Your Results Out There"
 author: "Max Held"
+pkgdown:
+  as_is: true
 ---
 
 ## Citations

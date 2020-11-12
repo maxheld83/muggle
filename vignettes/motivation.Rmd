@@ -4,6 +4,8 @@ subtitle: "foo"
 description: "Transitioning Small and Medium-Sized Teams from One-Off Reports to Data Products"
 author: "Max Held"
 date: "First published 2020-08, last updated `r Sys.Date()`"
+pkgdown:
+  as_is: true
 ---
 
 ## Abstract
