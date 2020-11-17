@@ -1,13 +1,10 @@
 ^.*\.Rproj$
-.rstudio
 ^\.github$
 ^LICENSE\.md$
 ^builder_img$
 Dockerfile
 .dockerignore
-^_pkgdown\.yml$
 ^docs$
 ^pkgdown$
 ^codecov\.yml$
 ^vignettes/
-^vignettes/articles$
