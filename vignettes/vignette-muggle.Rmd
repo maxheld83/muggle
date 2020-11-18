@@ -1,6 +1,7 @@
 ---
 title: "Vignette (muggle default)"
 subtitle: "Vignette based on `bookdown::html_document2()`"
+author: "Max Held"
 pkgdown:
   as_is: true
 ---

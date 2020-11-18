@@ -3,5 +3,4 @@ output:
     toc: true
     number_sections: false
     theme: null
-    df_print: paged
-    md_extensions: -markdown_in_html_blocks+raw_html-native_divs
+    md_extensions: -markdown_in_html_blocks+raw_html

@@ -1,16 +1,64 @@
 # Test Content
 
-<h2 data-toc-skip> A `data-toc-skip`ped Section</h2>
-
-```html
-<h2 data-toc-skip> A `data-toc-skip`ped Section</h2>
-```
+## Omitting Headings
 
 Pkgdown currently does not support omitting arbitrary headings from the table of contents (TOC) in a documented way (see [#1430](https://github.com/r-lib/pkgdown/issues/1430)).
 As a hack-job, you can pass a data attribute to the heading in plain HTML, which will be picked up by bootstrap-toc.
-Remember that depends on the current implementation of pkgdown and may break without notice.
+Remember that this hack depends on the current implementation of pkgdown and may break without notice.
 
-This chunk produces the above heading skipped from the TOC.
+This chunk produces the below heading skipped from the TOC.
+
+```html
+<h3 data-toc-skip> A `data-toc-skip`ped Section</h3>
+```
+
+<h3 data-toc-skip> A `data-toc-skip`ped Section</h3>
+
+## Bookdown Features {#bookdown}
+
+*Will only be rendered correctly in the muggle default version.*
+
+### Crossreferences
+
+#### Sections
+
+```md
+This is section \@ref(bookdown) (does not work because sections are unnummbered).
+```
+
+This is section \@ref(bookdown) (does not work because sections are unnummbered).
+
+```md
+But manual [links](#bookdown) work fine.
+```
+
+But manual [links](#bookdown) work fine.
+
+#### Tables
+
+```md
+Below in table \@ref(tab:cars), there are some cars.
+```
+
+Below in table \@ref(tab:cars), there are some cars.
+
+```{r cars}
+knitr::kable(x = mtcars[1:5, ], caption = "A Table With Some Cars")
+```
+
+#### Plots
+
+```md
+The below figure \@ref(fig:cars-2) is based on the same cars.
+```
+
+The below figure \@ref(fig:cars-2) is based on the same cars.
+
+```{r cars-2, fig.cap = "A Plot With Some Cars", fig.subcap = "A Subcaption About Cars"}
+library(ggplot2)
+p <- ggplot(mtcars, aes(factor(cyl), mpg))
+p + geom_violin(aes(fill = cyl))
+```
 
 ## Selected Bootstrap Features
 
@@ -98,7 +146,8 @@ The alert can also be dismissible.
 <div class="panel panel-primary">
   <div class="panel-heading">Panel heading</div>
   <div class="panel-body">
-    Markdown support inside HTML is *disabled* in the muggle vignette.
+    HTML can be properly indented without being interpreted as markdown code.
+    Oddly, *some* markdown is still available inside balanced HTML tags. 
   </div>
   <div class="panel-footer">Panel footer</div>
 </div>
@@ -107,7 +156,8 @@ The alert can also be dismissible.
 <div class="panel panel-primary">
   <div class="panel-heading">Panel heading</div>
   <div class="panel-body">
-    Markdown support inside HTML is *disabled* in the muggle vignette.
+    HTML can be properly indented without being interpreted as markdown code.
+    Oddly, *some* markdown is still available inside balanced HTML tags. 
   </div>
   <div class="panel-footer">Panel footer</div>
 </div>
