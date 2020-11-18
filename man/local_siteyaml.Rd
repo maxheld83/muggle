@@ -19,7 +19,7 @@ To enable it, you also must declare in the yaml frontmatter \emph{for each of th
  as_is: true
 }\if{html}{\out{</div>}}
 
-For an example of such a vignette with all its features, see \code{browseVignettes("vignette-muggle")}
+For an example of such a vignette with all its features, see \code{vignette("vignette-muggle")}
 }
 \section{Features}{
 
@@ -33,7 +33,6 @@ The \href{https://bookdown.org/yihui/bookdown/a-single-document.html}{\code{book
 \subsection{Raw HTML}{
 
 Pandoc extensions are set to allow correctly indented raw HTML inside vignettes.
-Conversely, markdown \emph{inside} HTML is disabled.
 }
 }
 

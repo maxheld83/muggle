@@ -40,7 +40,7 @@ build_article2 <- function(...) {
 #'  as_is: true
 #' ```
 #' 
-#' For an example of such a vignette with all its features, see `browseVignettes("vignette-muggle")`
+#' For an example of such a vignette with all its features, see `vignette("vignette-muggle")`
 #' 
 #' @section Features:
 #' ## Backported Bookdown Features
@@ -50,7 +50,6 @@ build_article2 <- function(...) {
 #' 
 #' ## Raw HTML
 #' Pandoc extensions are set to allow correctly indented raw HTML inside vignettes.
-#' Conversely, markdown *inside* HTML is disabled.
 #' 
 #' @inheritParams local_muggle_file
 #' @family pkgdown functions
