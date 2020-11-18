@@ -38,7 +38,7 @@ Pandoc extensions are set to allow correctly indented raw HTML inside vignettes.
 
 \seealso{
 Other pkgdown functions: 
-\code{\link{build_articles2}()},
-\code{\link{build_site2}()}
+\code{\link{build_site2}()},
+\code{\link{override_pkgdownyaml}()}
 }
 \concept{pkgdown functions}

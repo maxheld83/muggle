@@ -1,30 +1,58 @@
-#' Replacement version of [pkgdown::build_site()] with muggle defaults
+#' Replacement versions of [pkgdown::build_site()] etc. with muggle defaults
 #' 
-#' @inherit pkgdown::build_site
+#' Sets some muggle defaults for pkgdown to minimize code duplication across muggle projects.
+#' This includes overrides of `_pkgdown.yml` and `_site.yml`.
+#' 
+#' @section Additions to pkgdown:
+#' These replacement versions of pkgdown functions make the following changes to pkgdown, as applicable:
+#' - Declaring a default vignette rendering function ([local_siteyaml()])
+#' - Overriding some values in `_pkgdown.yml` ([override_pkgdownyaml()])
+#' - Sets `run_dont_run = TRUE`, so that examples inside `\dontrun{}` are still run inside of pkgdown.
+#'   Examples often need to be skipped on CRAN and other checks, though not when building pkgdown.
+#' 
+#' @inheritSection pkgdown::build_site YAML config - navbar
+#' @inheritParams pkgdown::build_site
 #' @inheritDotParams pkgdown::build_site
 #' @family pkgdown functions
 #' @export
-build_site2 <- function(...) {
+build_site2 <- function(run_dont_run = TRUE, ...) {
   local_siteyaml()
-  pkgdown::build_site()
+  pkgdown::build_site(
+    run_dont_run = run_dont_run,
+    override = override_pkgdownyaml(),
+    ...
+  )
 }
 
-#' Replacement version of [pkgdown::build_article()] with muggle defaults
-#' 
-#' @inherit pkgdown::build_article
-#' @inheritDotParams pkgdown::build_article
-#' @family pkgdown functions
-#' @export
+#' @describeIn build_site2 build all articles
+#' @inheritDotParams pkgdown::build_articles
 build_articles2 <- function(...) {
   local_siteyaml()
   pkgdown::build_articles(...)
 }
 
-#' @rdname build_articles2
+#' @describeIn build_site2 build an individual article
+#' @inheritDotParams pkgdown::build_articles
 build_article2 <- function(...) {
   local_siteyaml()
   pkgdown::build_article(...)
 }
+
+#' List of overrides for `_pkgdown.yml` with muggle defaults.
+#' 
+#' @examples
+#' \dontrun{
+#' override_pkgdownyaml()
+#' }
+#' 
+#' @family pkgdown functions
+#' @export
+override_pkgdownyaml <- function() {
+  list(
+    url = get_url_from_desc()
+  )
+}
+
 
 #' Temporarily create muggle default `vignettes/_site.yml` file
 #' 
@@ -56,4 +84,21 @@ build_article2 <- function(...) {
 #' @export
 local_siteyaml <- function(.local_envir = parent.frame()) {
   local_muggle_file("vignettes/_site.yml", .local_envir = .local_envir)
+}
+
+#' Retrieve the public URL from the `DESCRIPTION`
+#' 
+#' Chooses whichever URL in the `DESCRIPTION` is *not* on github.com.
+#' That's assumed to be the public-facing website, such as a pkgdown website on GitHub pages.
+#' 
+#' @keywords internal
+get_url_from_desc <- function() {
+  all_urls <- desc::desc_get_urls()
+  gh_urls <- sapply(all_urls, is_gh_url)
+  public_urls <- all_urls[!gh_urls]
+  public_urls[1]
+} 
+
+is_gh_url <- function(url) {
+  httr::parse_url(url)$hostname == "github.com"
 }

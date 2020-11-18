@@ -2,17 +2,24 @@
 % Please edit documentation in R/pkgdown.R
 \name{build_site2}
 \alias{build_site2}
-\title{Replacement version of \code{\link[pkgdown:build_site]{pkgdown::build_site()}} with muggle defaults}
+\alias{build_articles2}
+\alias{build_article2}
+\title{Replacement versions of \code{\link[pkgdown:build_site]{pkgdown::build_site()}} etc. with muggle defaults}
 \usage{
-build_site2(...)
+build_site2(run_dont_run = TRUE, ...)
+
+build_articles2(...)
+
+build_article2(...)
 }
 \arguments{
+\item{run_dont_run}{Run examples that are surrounded in \\dontrun?}
+
 \item{...}{
-  Arguments passed on to \code{\link[pkgdown:build_site]{pkgdown::build_site}}
+  Arguments passed on to \code{\link[pkgdown:build_site]{pkgdown::build_site}}, \code{\link[pkgdown:build_articles]{pkgdown::build_articles}}, \code{\link[pkgdown:build_articles]{pkgdown::build_articles}}
   \describe{
     \item{\code{pkg}}{Path to package.}
     \item{\code{examples}}{Run examples?}
-    \item{\code{run_dont_run}}{Run examples that are surrounded in \\dontrun?}
     \item{\code{seed}}{Seed used to initialize so that random examples are
 reproducible.}
     \item{\code{lazy}}{If \code{TRUE}, will only rebuild articles and reference pages
@@ -40,117 +47,30 @@ in the current process affects the build process.}
     \item{\code{install}}{If \code{TRUE}, will install the package in a temporary library
 so it is available for vignettes.}
     \item{\code{document}}{\strong{Deprecated} Use \code{devel} instead.}
+    \item{\code{quiet}}{Set to \code{FALSE} to display output of knitr and
+pandoc. This is useful when debugging.}
   }}
 }
 \description{
-\code{build_site()} is a convenient wrapper around six functions:
+Sets some muggle defaults for pkgdown to minimize code duplication across muggle projects.
+This includes overrides of \verb{_pkgdown.yml} and \verb{_site.yml}.
+}
+\section{Functions}{
 \itemize{
-\item \code{\link[pkgdown:init_site]{init_site()}}
-\item \code{\link[pkgdown:build_home]{build_home()}}
-\item \code{\link[pkgdown:build_reference]{build_reference()}}
-\item \code{\link[pkgdown:build_articles]{build_articles()}}
-\item \code{\link[pkgdown:build_tutorials]{build_tutorials()}}
-\item \code{\link[pkgdown:build_news]{build_news()}}
-}
+\item \code{build_articles2}: build all articles
 
-See the documentation for the each function to learn how to control
-that aspect of the site.
+\item \code{build_article2}: build an individual article
+}}
 
-Note if names of generated files were changed, you will need to use
-\code{\link[pkgdown:clean_site]{clean_site()}} first to clean up orphan files.
-}
-\section{YAML config}{
+\section{Additions to pkgdown}{
 
-
-There are five top-level YAML settings that affect the entire site:
-\code{destination}, \code{url}, \code{title}, \code{template}, and \code{navbar}.
-
-\code{destination} controls where the site will be generated. It defaults to
-\verb{docs/} (for GitHub pages), but you can override if desired. Relative
-paths will be taken relative to the package root.
-
-\code{url} optionally specifies the url where the site will be published.
-Supplying this will:
+These replacement versions of pkgdown functions make the following changes to pkgdown, as applicable:
 \itemize{
-\item Allow other pkgdown sites to link to your site when needed,
-rather than using generic links to \url{https://rdrr.io}.
-See \code{vignette("linking")} for more information.
-\item Generate a \code{sitemap.xml}, increasing the searchability of your site.
-\item Automatically generate a \code{CNAME} when
-\link[pkgdown:deploy_site_github]{deploying to github}.
-}\if{html}{\out{<div class="yaml">}}\preformatted{url: https://pkgdown.r-lib.org
-}\if{html}{\out{</div>}}
-
-\code{title} overrides the default site title, which is the package name.
-It's used in the page title and default navbar.
-
-You can also provided information to override the default display of
-the authors. Provided a list named with the name of each author,
-including \code{href} to add a link, or \code{html} to override the
-text:\preformatted{authors:
-  Hadley Wickham:
-    href: http://hadley.nz
-  RStudio:
-    href: https://www.rstudio.com
-    html: <img src="https://www.tidyverse.org/rstudio-logo.svg" height="24" />
+\item Declaring a default vignette rendering function (\code{\link[=local_siteyaml]{local_siteyaml()}})
+\item Overriding some values in \verb{_pkgdown.yml} (\code{\link[=override_pkgdownyaml]{override_pkgdownyaml()}})
+\item Sets \code{run_dont_run = TRUE}, so that examples inside \verb{\dontrun{}} are still run inside of pkgdown.
+Examples often need to be skipped on CRAN and other checks, though not when building pkgdown.
 }
-
-}
-
-\section{Development mode}{
-
-
-The development mode of a site controls four main things:
-\itemize{
-\item Where the site is built.
-\item The colour of the package version in the navbar.
-\item The optional tooltip associated with the version.
-\item The indexing of the site by search engines.
-}
-
-There are currently three possible development modes:
-\itemize{
-\item \strong{release}: site written to \verb{docs/}, the version gets the default
-colouring, and no message.
-\item \strong{development}: written to \verb{docs/dev/}, the version gets a danger label,
-and message stating these are docs for an in-development version of the
-package. The \code{noindex} meta tag is used to ensure that these packages are
-not indexed by search engines.
-\item \strong{unreleased}: the package is written to \verb{docs/}, the version gets a "danger"
-label, and the message indicates the package is not yet on CRAN.
-}
-
-The default development mode is "release". You can override it by adding a
-new \code{development} field to \verb{_pkgdown.yml}, e.g.\preformatted{development:
-  mode: devel
-}
-
-You can also have pkgdown automatically detect the mode with:\preformatted{development:
-  mode: auto
-}
-
-The mode will be automatically determined based on the version number:
-\itemize{
-\item \verb{0.0.0.9000} (\verb{0.0.0.*}): unreleased
-\item four version components: development
-\item everything else -> release
-}
-
-There are three other options that you can control:\preformatted{development:
-  destination: dev
-  version_label: danger
-  version_tooltip: "Custom message here"
-}
-
-\code{destination} allows you to override the default subdirectory used for the
-development site; it defaults to \verb{dev/}. \code{version_label} allows you to
-override the style used for development (and unreleased) versions of the
-package. It defaults to "danger", but you can set to "default", "info", or
-"warning" instead. (The precise colours are determined by your bootstrap
-theme, but become progressively more eye catching as you go from default
-to danger). Finally, you can choose to override the default tooltip with
-\code{version_tooltip}.
-
 }
 
 \section{YAML config - navbar}{
@@ -218,158 +138,9 @@ left menu.
 
 }
 
-\section{YAML config - search}{
-
-
-You can use \href{https://community.algolia.com/docsearch/}{docsearch} by algolia
-to add search to your site.\preformatted{template:
-  params:
-    docsearch:
-      api_key: API_KEY
-      index_name: INDEX_NAME
-}
-
-You also need to add a \verb{url:} field, see above.
-
-}
-
-\section{YAML config - template}{
-
-
-You can get complete control over the appearance of the site using the
-\code{template} component. There are two components to the template:
-the HTML templates used to layout each page, and the css/js assets
-used to render the page in the browser.
-
-The easiest way to tweak the default style is to use a bootswatch template,
-by passing on the \code{bootswatch} template parameter to the built-in
-template:\preformatted{template:
-  params:
-    bootswatch: cerulean
-}
-
-See a complete list of themes and preview how they look at
-\url{https://gallery.shinyapps.io/117-shinythemes/}:
-
-Optionally provide the \code{ganalytics} template parameter to enable
-\href{https://marketingplatform.google.com/about/analytics/}{Google Analytics}.
-It should correspond to your
-\href{https://support.google.com/analytics/answer/1008080}{tracking id}.
-
-When enabling Google Analytics, be aware of the type and amount of
-user information that you are collecting. You may wish to limit the
-extent of data collection or to add a privacy disclosure to your
-site, in keeping with current laws and regulations.\preformatted{template:
-  params:
-    ganalytics: UA-000000-01
-}
-
-Suppress indexing of your pages by web robots by setting \code{noindex: true}:\preformatted{template:
-  params:
-    noindex: true
-}
-
-You can also override the default templates and provide additional
-assets. You can do so by either storing in a \code{package} with
-directories \code{inst/pkgdown/assets} and \code{inst/pkgdown/templates},
-or by supplying \code{path} and \code{asset_path}. To suppress inclusion
-of the default assets, set \code{default_assets} to false.\preformatted{template:
-  package: mycustompackage
-
-# OR:
-
-template:
-  path: path/to/templates
-  assets: path/to/assets
-  default_assets: false
-}
-
-These settings are currently recommended for advanced users only. There
-is little documentation, and you'll need to read the existing source
-for pkgdown templates to ensure that you use the correct components.
-
-}
-
-\section{YAML config - repo}{
-
-
-pkgdown automatically generates links to the source repository in a few
-places
-\itemize{
-\item Articles and documentation topics are linked back to the
-underlying source file.
-\item The NEWS automatically links issue numbers and user names.
-\item The homepage provides a link to  "Browse source code"
-}
-
-pkgdown automatically figures out the necessary URLs if you link to a GitHub
-or GitLab repo in your \code{BugReports} or \code{URL} field. Otherwise, you can
-supply your own in the \code{repo} component:\if{html}{\out{<div class="yaml">}}\preformatted{repo:
-  url:
-    home: https://github.com/r-lib/pkgdown/
-    source: https://github.com/r-lib/pkgdown/blob/master/
-    issue: https://github.com/r-lib/pkgdown/issues/
-    user: https://github.com/
-}\if{html}{\out{</div>}}
-\itemize{
-\item \code{home}: path to package home on source code repository.
-\item \verb{source:}: path to source of individual file in master branch.
-\item \code{issue}: path to individual issue.
-\item \code{user}: path to user.
-}
-
-The varying components (e.g. path, issue number, user name) are pasted on
-the end of these URLs so they should have trailing \code{/}s.
-
-pkgdown defaults to using the "master" branch for source file URLs. This can
-be configured to use a specific branch when linking to source files by
-specifying a branch name:\if{html}{\out{<div class="yaml">}}\preformatted{repo:
-  branch: main
-}\if{html}{\out{</div>}}
-
-}
-
-\section{YAML config - deploy}{
-
-
-\code{deploy} currently offers a single parameter:
-\itemize{
-\item \code{install_metadata} allows you to install package index metadata into
-the package itself. Normally this metadata is made available on the
-published site; installing it into your package means that it's
-available for autolinking even if your website is not reachable at build
-time (e.g. because it's only behind the firewall or requires auth).\if{html}{\out{<div class="yaml">}}\preformatted{deploy:
-  install_metadata: true
-}\if{html}{\out{</div>}}
-}
-
-}
-
-\section{Options}{
-
-
-Users with limited internet connectivity can disable CRAN checks by setting
-\code{options(pkgdown.internet = FALSE)}. This will also disable some features
-from pkgdown that requires an internet connectivity. However, if it is used
-to build docs for a package that requires internet connectivity in examples
-or vignettes, this connection is required as this option won't apply on them.
-
-Users can set a timeout for \code{build_site(new_process = TRUE)} with
-\code{options(pkgdown.timeout = Inf)}, which is useful to prevent stalled builds from
-hanging in cron jobs.
-
-}
-
-\examples{
-\dontrun{
-build_site()
-
-build_site(override = list(destination = tempdir()))
-}
-}
 \seealso{
 Other pkgdown functions: 
-\code{\link{build_articles2}()},
-\code{\link{local_siteyaml}()}
+\code{\link{local_siteyaml}()},
+\code{\link{override_pkgdownyaml}()}
 }
 \concept{pkgdown functions}
