@@ -6,5 +6,5 @@ author: "Max Held"
 
 This just tests default pkgdown behavior for comparison.
 
-```{r, child=system.file("formatting.Rmd", package = "muggle")}
+```{r, child=muggle::get_muggle_file("vignettes/formatting.Rmd")}
 ```

@@ -79,7 +79,7 @@ jobs:
       - name: Test Coverage
         run: covr::codecov()
       - name: Build Package Website
-        run: pkgdown::build_site(override = list(new_process = FALSE))
+        run: muggle::build_site2(override = list(new_process = FALSE))
       - uses: docker/build-push-action@v1
         name: Build Buildtime Image
         with:

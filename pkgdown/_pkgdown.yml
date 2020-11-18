@@ -39,6 +39,12 @@ reference:
     Deploy muggle projects to the public cloud.
 - contents:
   - has_concept("deployment functions")
+- title: Interactive Use
+  desc: >
+    Wrappers with muggle defaults.
+- subtitle: Pkgdown Website
+- contents:
+  - has_concept("pkgdown functions")
 articles:
 - title: Background
   navbar: Background
