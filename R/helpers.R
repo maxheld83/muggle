@@ -30,14 +30,6 @@ remove_dep <- function(x) {
   )
 }
 
-#' @inherit usethis::use_package
-#' @description [usethis::use_package()] with muggle defaults
-#' @family helpers for repeated interactive use
-#' @export
-use_package2 <- function(package, type = "Imports") {
-  usethis::use_package(package = package, type = type, min_version = TRUE)
-}
-
 #' Muggle files
 #' 
 #' @param muggle_file 
