@@ -5,7 +5,7 @@
 #' 
 #' @section Additions to pkgdown:
 #' These replacement versions of pkgdown functions make the following changes to pkgdown, as applicable:
-#' - Declaring a default vignette rendering function ([local_siteyaml()])
+#' - If there are `vignettes/`, declaring a default vignette rendering function ([local_siteyaml()])
 #' - Overriding some values in `_pkgdown.yml` ([override_pkgdownyaml()])
 #' - Sets `run_dont_run = TRUE`, so that examples inside `\dontrun{}` are still run inside of pkgdown.
 #'   Examples often need to be skipped on CRAN and other checks, though not when building pkgdown.
@@ -16,7 +16,7 @@
 #' @family pkgdown functions
 #' @export
 build_site2 <- function(run_dont_run = TRUE, ...) {
-  local_siteyaml()
+  if (fs::dir_exists("vignettes")) local_siteyaml()
   pkgdown::build_site(
     run_dont_run = run_dont_run,
     override = override_pkgdownyaml(),
