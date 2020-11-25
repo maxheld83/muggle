@@ -6,7 +6,7 @@
 \alias{build_article2}
 \title{Replacement versions of \code{\link[pkgdown:build_site]{pkgdown::build_site()}} etc. with muggle defaults}
 \usage{
-build_site2(run_dont_run = TRUE, ...)
+build_site2(run_dont_run = TRUE, override = list(), ...)
 
 build_articles2(...)
 
@@ -14,6 +14,9 @@ build_article2(...)
 }
 \arguments{
 \item{run_dont_run}{Run examples that are surrounded in \\dontrun?}
+
+\item{override}{An optional named list used to temporarily override
+values in \verb{_pkgdown.yml}}
 
 \item{...}{
   Arguments passed on to \code{\link[pkgdown:build_site]{pkgdown::build_site}}, \code{\link[pkgdown:build_articles]{pkgdown::build_articles}}, \code{\link[pkgdown:build_articles]{pkgdown::build_articles}}
@@ -24,8 +27,6 @@ build_article2(...)
 reproducible.}
     \item{\code{lazy}}{If \code{TRUE}, will only rebuild articles and reference pages
 if the source is newer than the destination.}
-    \item{\code{override}}{An optional named list used to temporarily override
-values in \verb{_pkgdown.yml}}
     \item{\code{preview}}{If \code{TRUE}, or \code{is.na(preview) && interactive()}, will preview
 freshly generated section in browser.}
     \item{\code{devel}}{Use development or deployment process?
@@ -67,7 +68,8 @@ This includes overrides of \verb{_pkgdown.yml} and \verb{_site.yml}.
 These replacement versions of pkgdown functions make the following changes to pkgdown, as applicable:
 \itemize{
 \item If there are \verb{vignettes/}, declaring a default vignette rendering function (\code{\link[=local_siteyaml]{local_siteyaml()}})
-\item Overriding some values in \verb{_pkgdown.yml} (\code{\link[=override_pkgdownyaml]{override_pkgdownyaml()}})
+\item Overriding some values in \verb{_pkgdown.yml} by appending \code{\link[=override_pkgdownyaml]{override_pkgdownyaml()}}) to \code{override}.
+Be careful not to provide conflicting overrides.
 \item Sets \code{run_dont_run = TRUE}, so that examples inside \verb{\dontrun{}} are still run inside of pkgdown.
 Examples often need to be skipped on CRAN and other checks, though not when building pkgdown.
 }
