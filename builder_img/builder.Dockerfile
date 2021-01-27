@@ -5,7 +5,7 @@ FROM rstudio/r-base:4.0.3-focal AS base
 # there seems to be no better way; cannot persist env vars based on running scripts
 ENV R_HOME="/opt/R/4.0.3/lib/R"
 # this freezes r dependencies see https://github.com/subugoe/muggle/issues/60
-ENV RSPM="https://packagemanager.rstudio.com/all/__linux__/focal/696304"
+ENV RSPM="https://packagemanager.rstudio.com/all/__linux__/focal/1014755"
 # TODO remove when migrated to rspm https://github.com/subugoe/muggle/issues/25
 ENV RHUB_PLATFORM="linux-x86_64-ubuntu-gcc"
 # just FYI; this is were base pkg live, they are always available
