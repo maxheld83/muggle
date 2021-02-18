@@ -28,11 +28,11 @@ reference:
    Setting up RStudio and vscode.
 - contents:
   - has_concept("editor functions")
-- subtitle: Testing
+- subtitle: Quality Control
   desc: >
-    Set up unit testing.
+    Set up testing and linting.
 - contents:
-  - has_concept("testing functions")
+  - has_concept("quality control functions")
 - subtitle: Deployment
   desc: >
     Deploy muggle projects to the public cloud.

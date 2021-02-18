@@ -13,4 +13,8 @@ giving the \code{username/repo} URL slug of the project.}
 \description{
 Set up codecov
 }
-\concept{testing functions}
+\seealso{
+Other quality control functions: 
+\code{\link{use_superlinter}()}
+}
+\concept{quality control functions}
