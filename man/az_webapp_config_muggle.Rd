@@ -42,27 +42,55 @@ Wraps the \href{https://docs.microsoft.com/en-us/cli/azure/?view=azure-cli-lates
 Wrapping with muggle defaults; use only inside muggle projects.
 }
 \section{Authenticating Against GitHub Packages}{
-Because muggle stores the docker images with the shiny runtimes on GitHub Packages, Azure must pull images from there, not the commonly used Docker Hub.
+Because muggle stores the docker images with the shiny runtimes on
+GitHub Packages, Azure must pull images from there,
+not the commonly used Docker Hub.
 
-Currently, GitHub Packages does not offer public images, even for public repositories (\href{https://github.com/subugoe/muggle/issues/133}{#133}).
-That means that Azure must be \href{https://docs.github.com/en/packages/using-github-packages-with-your-projects-ecosystem/configuring-docker-for-use-with-github-packages}{authenticated} to be able to download the runtime images.
-This is the inverse of the the \verb{azure login} GitHub Action, which authenticates the GitHub Actions runtime to talk to Azure.
+Currently, GitHub Packages does not offer public images,
+even for public repositories
+(\href{https://github.com/subugoe/muggle/issues/133}{#133})
+That means that Azure must be
+\href{https://docs.github.com/en/packages/using-github-packages-with-your-projects-ecosystem/configuring-docker-for-use-with-github-packages}{authenticated}
+to be able to download the runtime images.
+This is the inverse of the the \verb{azure login} GitHub Action,
+which authenticates the GitHub Actions runtime to talk to Azure.
 
-There are (only) two ways to do this, both suboptimal (\href{https://github.com/subugoe/muggle/issues/132}{#132}):
+There are (only) two ways to do this,
+both suboptimal (\href{https://github.com/subugoe/muggle/issues/132}{#132}):
 \enumerate{
-\item You can authenticate Azure with a \href{https://docs.github.com/en/github/authenticating-to-github/creating-a-personal-access-token}{personal access token (PAT)} and the corresponding \strong{static GitHub username}.
-No matter who commits and triggered the deployment, always the same personal GitHub credentials (say, those of Jane Doe) will be used.
-To do this, the volunteering team member should create a PAT on GitHub, scope it minimally to only read packages, and paste that into the Azure web ui at portal.azure.com.
-A minimally scoped PAT may be reasonably safe, but the approach is still cumbersome and awkward.
-\item You can authenticate Azure towards GitHub Packages \strong{with the \code{GITHUB_ACTOR} and \code{GITHUB_TOKEN} pair} \href{https://docs.github.com/en/actions/configuring-and-managing-workflows/authenticating-with-the-github_token}{furnished} for GitHub Actions, from which the deployment takes place.
-The \code{GITHUB_ACTOR} environment variable will always be the GitHub username of whoever triggered the workflow run, and therefore, the deployment.
-The \code{GITHUB_TOKEN} is a PAT scoped to \emph{only} that repo and will expire automatically after the workflow run is completed.
-To use this authentication, use the below defaults and expose the \code{GITHUB_TOKEN} to in your workflow \verb{*.yaml} file.\if{html}{\out{<div class="yaml">}}\preformatted{env:
+\item You can authenticate Azure with a
+\href{https://docs.github.com/en/github/authenticating-to-github/creating-a-personal-access-token}{personal access token (PAT)}
+and the corresponding \strong{static GitHub username}.
+No matter who commits and triggered the deployment,
+always the same personal GitHub credentials
+(say, those of Jane Doe) will be used.
+To do this, the volunteering team member should create a PAT on GitHub,
+scope it minimally to only read packages,
+and paste that into the Azure web ui at portal.azure.com.
+A minimally scoped PAT may be reasonably safe,
+but the approach is still cumbersome and awkward.
+\item You can authenticate Azure towards GitHub Packages
+\strong{with the \code{GITHUB_ACTOR} and \code{GITHUB_TOKEN} pair}
+\href{https://docs.github.com/en/actions/configuring-and-managing-workflows/authenticating-with-the-github_token}{furnished}
+for GitHub Actions, from which the deployment takes place.
+The \code{GITHUB_ACTOR} environment variable will always be
+the GitHub username of whoever triggered the workflow run,
+and therefore, the deployment.
+The \code{GITHUB_TOKEN} is a PAT scoped to \emph{only} that repo and will expire
+automatically after the workflow run is completed.
+To use this authentication, use the below defaults and expose the
+\code{GITHUB_TOKEN} to in your workflow \verb{*.yaml} file.\if{html}{\out{<div class="yaml">}}\preformatted{env:
   GITHUB_TOKEN: $\{\{ secrets.GITHUB_TOKEN \}\}
 }\if{html}{\out{</div>}}
 
-This is a more elegant, and arguably more secure solution, though the \code{GITHUB_TOKEN} still has more scope than just to read packages, if only for the repo in question.
-This form of authentication seems to work reliably, but may break future app (re)starts on Azure: Should Azure loose the docker cache of the image in question, it will not be able to \verb{docker pull} the image again, because the \code{GITHUB_TOKEN} will have expired by then.
+This is a more elegant, and arguably more secure solution,
+though the \code{GITHUB_TOKEN} still has more scope than just to read packages,
+if only for the repo in question.
+This form of authentication seems to work reliably,
+but may break future app (re)starts on Azure:
+Should Azure loose the docker cache of the image in question,
+it will not be able to \verb{docker pull} the image again,
+because the \code{GITHUB_TOKEN} will have expired by then.
 Only a new workflow run can heal the app in this scenario.
 It remains to be seen how common this problem is.
 }

@@ -1,7 +1,8 @@
 #' Browse to URL
 #'
 #' @details
-#' This function is copied from an unexported function in [usethis](https://github.com/r-lib/usethis/blob/23dd62c5e7713ed8ecceae82e6338f795d30ba92/R/helpers.R).
+#' This function is copied from an unexported function in
+#' [usethis](https://github.com/r-lib/usethis/blob/23dd62c5e7713ed8ecceae82e6338f795d30ba92/R/helpers.R).
 #'
 #' @param ... Elements of the URL
 #' @param open `[logical(1)]` giving whether the URL should be opened
@@ -74,8 +75,8 @@ local_muggle_file <- function(muggle_file, .local_envir = parent.frame()) {
 
 #' Determine if code is running inside GitHub Actions
 #'
-#' Looks for the `GITHUB_ACTIONS` environment variable,
-#' as [documented](https://docs.github.com/en/actions/configuring-and-managing-workflows/using-environment-variables)
+#' Looks for the `GITHUB_ACTIONS` environment variable, as
+#' [documented](https://docs.github.com/en/actions/configuring-and-managing-workflows/using-environment-variables)
 #'
 #' @keywords internal
 is_github_actions <- function() {

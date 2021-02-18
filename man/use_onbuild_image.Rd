@@ -7,7 +7,8 @@
 use_onbuild_image()
 }
 \description{
-Adds or updates a \code{Dockerfile} and corresponding \code{main.yaml} GitHub Actions workflow.
+Adds or updates a \code{Dockerfile}
+and corresponding \code{main.yaml} GitHub Actions workflow.
 }
 \seealso{
 Other compute environment functions: 

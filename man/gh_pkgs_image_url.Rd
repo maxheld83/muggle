@@ -24,18 +24,28 @@ Defaults to muggle convention.}
 Users should stick to the default; manual entry is only used for testing.}
 
 \item{target}{Build target for multistage muggle builds.
-By convention, for a package \code{foo}, {muggle} would build a \code{foo-buildtime} and \code{foo-runtime} for the \code{buildtime} and \code{runtime} docker multistage build targets, respectively.
-A \code{buildtime} target will exist for all {muggle} projects, a \code{runtime} target only for projects with deployed runtimes such as a shiny app}
+By convention, for a package \code{foo}, {muggle} would build a \code{foo-buildtime}
+and \code{foo-runtime} for the \code{buildtime} and \code{runtime} docker multistage
+build targets, respectively.
+A \code{buildtime} target will exist for all {muggle} projects,
+a \code{runtime} target only for projects
+with deployed runtimes such as a shiny app}
 }
 \value{
 character string
 }
 \description{
 Helpful to quickly run an image locally or deploy it.
-See the \href{https://docs.github.com/en/packages/using-github-packages-with-your-projects-ecosystem/configuring-docker-for-use-with-github-packages}{GitHub Packages for Docker documentation} for details.
-Forms a URL of the form \code{docker.pkg.github.com/OWNER/REPOSITORY/IMAGE_NAME:VERSION}
-Notice how, different from Docker Hub, docker images on GitHub Packages have an \code{IMAGE_NAME} appended to the familiar \code{OWNER/REPOSITORY} pattern.
-These \code{IMAGE_NAME}s are immutable (cannot be changed nor deleted) and must be unique per GitHub repository.
+See the
+\href{https://docs.github.com/en/packages/using-github-packages-with-your-projects-ecosystem/configuring-docker-for-use-with-github-packages}{GitHub Packages for Docker documentation}
+for details.
+Forms a URL of the form
+\code{docker.pkg.github.com/OWNER/REPOSITORY/IMAGE_NAME:VERSION}
+Notice how, different from Docker Hub,
+docker images on GitHub Packages have an \code{IMAGE_NAME}
+appended to the familiar \code{OWNER/REPOSITORY} pattern.
+These \code{IMAGE_NAME}s are immutable (cannot be changed nor deleted)
+and must be unique per GitHub repository.
 }
 \section{Related Functions and Methods}{
 \subsection{Functions}{
@@ -43,7 +53,9 @@ These \code{IMAGE_NAME}s are immutable (cannot be changed nor deleted) and must 
 \item \code{gh_pkgs_image_name}: Get the docker image name conventionally used in muggle projects
 }
 \itemize{
-\item \code{gh_pkgs_image_version}: Get the sha of the \emph{latest} \verb{git commit} if on GitHub Actions, or the \emph{head} reference (the branch or tag) otherwise (not recommended for reproducibility).
+\item \code{gh_pkgs_image_version}: Get the sha of the \emph{latest} \verb{git commit} if on GitHub Actions,
+or the \emph{head} reference (the branch or tag) otherwise
+(not recommended for reproducibility).
 }}}
 
 \seealso{

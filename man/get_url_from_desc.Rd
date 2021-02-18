@@ -8,6 +8,7 @@ get_url_from_desc()
 }
 \description{
 Chooses whichever URL in the \code{DESCRIPTION} is \emph{not} on github.com.
-That's assumed to be the public-facing website, such as a pkgdown website on GitHub pages.
+That's assumed to be the public-facing website,
+such as a pkgdown website on GitHub pages.
 }
 \keyword{internal}

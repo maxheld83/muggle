@@ -14,25 +14,34 @@ Upgrades vignettes to muggle default.
 Wraps \code{\link[=local_muggle_file]{local_muggle_file()}} to delete file upon use.
 }
 \details{
-This \verb{vignettes/_site.yml} declares the default vignette rendering function for muggle vignettes.
-To enable it, you also must declare in the yaml frontmatter \emph{for each of the vignettes}:\if{html}{\out{<div class="yaml">}}\preformatted{pkgdown:
+This \verb{vignettes/_site.yml} declares the default vignette rendering function
+for muggle vignettes.
+To enable it,
+you also must declare in the yaml frontmatter \emph{for each of the vignettes}:\if{html}{\out{<div class="yaml">}}\preformatted{pkgdown:
  as_is: true
 }\if{html}{\out{</div>}}
 
-For an example of such a vignette with all its features, see \code{vignette("vignette-muggle")}
+For an example of such a vignette with all its features,
+see \code{vignette("vignette-muggle")}
 }
 \section{Features}{
 
 \subsection{Backported Bookdown Features}{
 
-By default, pkgdown builds vignettes (or rather, articles) using a special format based on \code{\link[rmarkdown:html_document]{rmarkdown::html_document()}}.
-This format does not include the automatic numbering and crossreferencing of figures, tables, equations, and (for cross-references) sections supported by \href{http://bookdown.org}{bookdown}.
-The \href{https://bookdown.org/yihui/bookdown/a-single-document.html}{\code{bookdown::html_document2()}} render function backports these features for uses outside of bookdown.
+By default, pkgdown builds vignettes (or rather, articles)
+using a special format based on \code{\link[rmarkdown:html_document]{rmarkdown::html_document()}}.
+This format does not include the automatic numbering and
+crossreferencing of figures, tables, equations, and (for cross-references)
+sections supported by \href{http://bookdown.org}{bookdown}.
+The
+\href{https://bookdown.org/yihui/bookdown/a-single-document.html}{\code{bookdown::html_document2()}}
+render function backports these features for uses outside of bookdown.
 }
 
 \subsection{Raw HTML}{
 
-Pandoc extensions are set to allow correctly indented raw HTML inside vignettes.
+Pandoc extensions are set to allow correctly indented raw HTML
+inside vignettes.
 }
 }
 

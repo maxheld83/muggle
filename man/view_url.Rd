@@ -15,6 +15,7 @@ view_url(..., open = interactive())
 Browse to URL
 }
 \details{
-This function is copied from an unexported function in \href{https://github.com/r-lib/usethis/blob/23dd62c5e7713ed8ecceae82e6338f795d30ba92/R/helpers.R}{usethis}.
+This function is copied from an unexported function in
+\href{https://github.com/r-lib/usethis/blob/23dd62c5e7713ed8ecceae82e6338f795d30ba92/R/helpers.R}{usethis}.
 }
 \keyword{internal}

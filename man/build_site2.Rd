@@ -53,7 +53,8 @@ pandoc. This is useful when debugging.}
   }}
 }
 \description{
-Sets some muggle defaults for pkgdown to minimize code duplication across muggle projects.
+Sets some muggle defaults for pkgdown to minimize code duplication across
+muggle projects.
 This includes overrides of \verb{_pkgdown.yml} and \verb{_site.yml}.
 }
 \section{Related Functions and Methods}{
@@ -67,13 +68,18 @@ This includes overrides of \verb{_pkgdown.yml} and \verb{_site.yml}.
 
 \section{Additions to pkgdown}{
 
-These replacement versions of pkgdown functions make the following changes to pkgdown, as applicable:
+These replacement versions of pkgdown functions make the following changes
+to pkgdown, as applicable:
 \itemize{
-\item If there are \verb{vignettes/}, declaring a default vignette rendering function (\code{\link[=local_siteyaml]{local_siteyaml()}})
-\item Overriding some values in \verb{_pkgdown.yml} by appending \code{\link[=override_pkgdownyaml]{override_pkgdownyaml()}}) to \code{override}.
+\item If there are \verb{vignettes/},
+declaring a default vignette rendering function (\code{\link[=local_siteyaml]{local_siteyaml()}})
+\item Overriding some values in \verb{_pkgdown.yml}
+by appending \code{\link[=override_pkgdownyaml]{override_pkgdownyaml()}}) to \code{override}.
 Be careful not to provide conflicting overrides.
-\item Sets \code{run_dont_run = TRUE}, so that examples inside \verb{\dontrun{}} are still run inside of pkgdown.
-Examples often need to be skipped on CRAN and other checks, though not when building pkgdown.
+\item Sets \code{run_dont_run = TRUE}, so that examples inside \verb{\dontrun{}}
+are still run inside of pkgdown.
+Examples often need to be skipped on CRAN and other checks,
+though not when building pkgdown.
 }
 }
 

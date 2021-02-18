@@ -1,10 +1,16 @@
 #' Get the full docker image url for an image on GitHub Packages
 #'
 #' Helpful to quickly run an image locally or deploy it.
-#' See the [GitHub Packages for Docker documentation](https://docs.github.com/en/packages/using-github-packages-with-your-projects-ecosystem/configuring-docker-for-use-with-github-packages) for details.
-#' Forms a URL of the form `docker.pkg.github.com/OWNER/REPOSITORY/IMAGE_NAME:VERSION`
-#' Notice how, different from Docker Hub, docker images on GitHub Packages have an `IMAGE_NAME` appended to the familiar `OWNER/REPOSITORY` pattern.
-#' These `IMAGE_NAME`s are immutable (cannot be changed nor deleted) and must be unique per GitHub repository.
+#' See the
+#' [GitHub Packages for Docker documentation](https://docs.github.com/en/packages/using-github-packages-with-your-projects-ecosystem/configuring-docker-for-use-with-github-packages)
+#' for details.
+#' Forms a URL of the form
+#' `docker.pkg.github.com/OWNER/REPOSITORY/IMAGE_NAME:VERSION`
+#' Notice how, different from Docker Hub,
+#' docker images on GitHub Packages have an `IMAGE_NAME`
+#' appended to the familiar `OWNER/REPOSITORY` pattern.
+#' These `IMAGE_NAME`s are immutable (cannot be changed nor deleted)
+#' and must be unique per GitHub repository.
 #'
 #' @param image_name,version Image name and version as strings.
 #' Defaults to muggle convention.
@@ -17,7 +23,9 @@
 #' @family compute environment functions
 #'
 #' @export
-gh_pkgs_image_url <- function(image_name = gh_pkgs_image_name(target = "runtime"),
+gh_pkgs_image_url <- function(image_name = gh_pkgs_image_name(
+                                target = "runtime"
+                              ),
                               version = gh_pkgs_image_version(),
                               repo_spec = gh_repo_spec()) {
   paste(
@@ -32,8 +40,12 @@ gh_pkgs_image_url <- function(image_name = gh_pkgs_image_name(target = "runtime"
 #' Get the docker image name conventionally used in muggle projects
 #'
 #' @param target Build target for multistage muggle builds.
-#' By convention, for a package `foo`, {muggle} would build a `foo-buildtime` and `foo-runtime` for the `buildtime` and `runtime` docker multistage build targets, respectively.
-#' A `buildtime` target will exist for all {muggle} projects, a `runtime` target only for projects with deployed runtimes such as a shiny app
+#' By convention, for a package `foo`, {muggle} would build a `foo-buildtime`
+#' and `foo-runtime` for the `buildtime` and `runtime` docker multistage
+#' build targets, respectively.
+#' A `buildtime` target will exist for all {muggle} projects,
+#' a `runtime` target only for projects
+#' with deployed runtimes such as a shiny app
 #'
 #' @export
 gh_pkgs_image_name <- function(target = c("buildtime", "runtime")) {
@@ -42,7 +54,9 @@ gh_pkgs_image_name <- function(target = c("buildtime", "runtime")) {
 }
 
 #' @describeIn gh_pkgs_image_url
-#' Get the sha of the *latest* `git commit` if on GitHub Actions, or the *head* reference (the branch or tag) otherwise (not recommended for reproducibility).
+#' Get the sha of the *latest* `git commit` if on GitHub Actions,
+#' or the *head* reference (the branch or tag) otherwise
+#' (not recommended for reproducibility).
 gh_pkgs_image_version <- function() {
   if (is_github_actions()) {
     return(Sys.getenv("GITHUB_SHA"))
@@ -71,7 +85,8 @@ gh_repo_spec <- function() {
 
 #' Determine if code is running inside GitHub Actions
 #'
-#' Looks for the `GITHUB_ACTIONS` environment variable, as [documented](https://docs.github.com/en/actions/configuring-and-managing-workflows/using-environment-variables)
+#' Looks for the `GITHUB_ACTIONS` environment variable, as
+#' [documented](https://docs.github.com/en/actions/configuring-and-managing-workflows/using-environment-variables)
 #'
 #' @noRd
 is_github_actions <- function() {

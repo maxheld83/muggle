@@ -2,22 +2,37 @@
 #'
 #' @description
 #' Set up, or migrate to a muggle project.
-#' Wraps the following steps, *if the respective files or configuration do not already exist*:
+#' Wraps the following steps, *if the respective files
+#' or configuration do not already exist*:
 #'
-#' 1. **Package Structure**: Sets up scaffolding via [usethis::create_package()] and asks the user to complete the `DESCRIPTION`.
-#' 1. **Editors/IDEs**: Sets up [vscode](http://code.visualstudio.com) and RStudio as editors.
-#' 1. **Git/GitHub**: Initialises a git repo via [usethis::use_git()], creates a repo on GitHub and sets it as an origin remote.
-#' 1. **README**: Adds a `README.md` via [usethis::use_readme_md()] and asks the user to complete it.
-#' 1. **Testing**: Sets up the project for unit tests via [usethis::use_testthat()] and test coverage via [usethis::use_coverage()].
-#' 1. **Documentation**: Sets up markdown support in roxygen via [usethis::use_roxygen_md()], package documentation via [usethis::use_package_doc()] and ddds a pkgdown website via [usethis::use_pkgdown()].
+#' 1. **Package Structure**:
+#'     Sets up scaffolding via [usethis::create_package()]
+#'     and asks the user to complete the `DESCRIPTION`.
+#' 1. **Editors/IDEs**:
+#'     Sets up [vscode](http://code.visualstudio.com)
+#'     and RStudio as editors.
+#' 1. **Git/GitHub**:
+#'     Initialises a git repo via [usethis::use_git()],
+#'     creates a repo on GitHub and sets it as an origin remote.
+#' 1. **README**:
+#'     Adds a `README.md` via [usethis::use_readme_md()]
+#'     and asks the user to complete it.
+#' 1. **Quality Control**:
+#'     Sets up the project for unit tests via [usethis::use_testthat()]
+#'     and test coverage via [usethis::use_coverage()].
+#' 1. **Documentation**:
+#'     Sets up markdown support in roxygen via [usethis::use_roxygen_md()],
+#'     package documentation via [usethis::use_package_doc()]
+#'     and adds a pkgdown website via [usethis::use_pkgdown()].
 #' 1. **Workflow Automation**: sets up caching at [lib_cache_path] and tba.
 #' 1. **Compute Environment**: tba.
 #'
 #'
 #' @details # Warning
 #' - Must not be run *inside* a package, but at the root of all packages
-#' - If run on an existing project, the project should be under version control, with a clean working tree.
-#'   The user should check all changes.
+#' - If run on an existing project,
+#'     the project should be under version control, with a clean working tree.
+#'     The user should check all changes.
 #'
 #' @inheritParams usethis::create_package
 #' @param license one of the license functions in [usethis]
@@ -64,7 +79,7 @@ create_muggle_package <- function(path,
   usethis::use_git()
   # imperfect check for whether github remote is set
   if (nrow(gert::git_remote_list()) == 0) {
-    # if there was already a git remote as will be the case for existing projects,
+    # if there was already a git remote as will be true for existing projects,
     # the whole function would error out here
     usethis::use_github(
       organisation = organisation,

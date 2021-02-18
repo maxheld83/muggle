@@ -8,8 +8,6 @@
 [![muggle-buildtime Docker Pulls](https://img.shields.io/docker/pulls/subugoe/muggle-buildtime-onbuild?label=muggle-buildtime%20docker%20pulls&style=flat)](https://hub.docker.com/repository/docker/subugoe/muggle-buildtime-onbuild)
 [![muggle-runtime Docker Pulls](https://img.shields.io/docker/pulls/subugoe/muggle-runtime-onbuild?label=muggle-runtime%20docker%20pulls&style=flat)](https://hub.docker.com/repository/docker/subugoe/muggle-runtime-onbuild)
 <!-- badges: end -->
-
-
 ## Overview
 
 > Reproducible DevOps Strictly Without Magic
