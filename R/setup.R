@@ -53,8 +53,11 @@ create_muggle_package <- function(path,
     # for some reason this needs to be a separate call
     desc::desc_add_role(role = c("cph", "fnd"), given = license_holder)
   }
+
+  # ide and editor settings ====
   # configure to never save/load Rdata
   usethis::use_blank_slate("project")
+  use_radian()
 
   # git/github ====
   usethis::use_git()

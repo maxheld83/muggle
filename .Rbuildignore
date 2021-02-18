@@ -8,3 +8,4 @@ Dockerfile
 ^codecov\.yml$
 ^vignettes/
 ^muggle\.Rproj$
+^\.radian_history$
