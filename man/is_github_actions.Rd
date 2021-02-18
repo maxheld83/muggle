@@ -7,6 +7,7 @@
 is_github_actions()
 }
 \description{
-Looks for the \code{GITHUB_ACTIONS} environment variable, as \href{https://docs.github.com/en/actions/configuring-and-managing-workflows/using-environment-variables}{documented}
+Looks for the \code{GITHUB_ACTIONS} environment variable,
+as \href{https://docs.github.com/en/actions/configuring-and-managing-workflows/using-environment-variables}{documented}
 }
 \keyword{internal}

@@ -21,7 +21,8 @@
 #'
 #' @inheritParams usethis::create_package
 #' @param license one of the license functions in [usethis]
-#' @param license_holder giving the license holder, used as `cph` and `fnd` role in `DESCRIPTION`
+#' @param license_holder
+#' giving the license holder, used as `cph` and `fnd` role in `DESCRIPTION`
 #' @inheritParams usethis::use_github
 #' @family setup functions
 #' @export
@@ -63,7 +64,8 @@ create_muggle_package <- function(path,
   usethis::use_git()
   # imperfect check for whether github remote is set
   if (nrow(gert::git_remote_list()) == 0) {
-    # if there was already a git remote as will be the case for existing projects, the whole function would error out here
+    # if there was already a git remote as will be the case for existing projects,
+    # the whole function would error out here
     usethis::use_github(
       organisation = organisation,
       private = private,
@@ -98,9 +100,10 @@ create_muggle_package <- function(path,
     text = c("See `help('muggle::lib_cache_path')`"),
     path = fs::path(lib_cache_path, "README.md")
   )
-  usethis::ui_done(
-    "Created {usethis::ui_code(lib_cache_path)} to add cached dependencies to docker build context on GitHub actions."
-  )
+  usethis::ui_done(c(
+    "Created {usethis::ui_code(lib_cache_path)} to add cached dependencies ",
+    "to docker build context on GitHub actions."
+  ))
 
   # compute environment ====
   # TODO add docker generation

@@ -28,7 +28,8 @@ gh_pkgs_image_url <- function(image_name = gh_pkgs_image_name(target = "runtime"
   )
 }
 
-#' @describeIn gh_pkgs_image_url Get the docker image name conventionally used in muggle projects
+#' @describeIn gh_pkgs_image_url
+#' Get the docker image name conventionally used in muggle projects
 #'
 #' @param target Build target for multistage muggle builds.
 #' By convention, for a package `foo`, {muggle} would build a `foo-buildtime` and `foo-runtime` for the `buildtime` and `runtime` docker multistage build targets, respectively.
@@ -64,7 +65,7 @@ gh_pkgs_image_version <- function() {
 gh_repo_spec <- function() {
   # something like this already exists in usethis, but seems unexported
   # muggle image *has* git, and on gh actions should also have a repo
-  # but this will not work in a local docker container, which has git, but no repo
+  # but this will not work in a local docker cont, which has git, but no repo
   do.call(paste, c(gh::gh_tree_remote(), sep = "/"))
 }
 
