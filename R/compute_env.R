@@ -1,6 +1,7 @@
 #' Set up or update the compute environment
 #'
-#' Adds or updates a `Dockerfile` and corresponding `main.yaml` GitHub Actions workflow.
+#' Adds or updates a `Dockerfile`
+#' and corresponding `main.yaml` GitHub Actions workflow.
 #'
 #' @family compute environment functions
 #' @export
@@ -13,7 +14,8 @@ use_onbuild_image <- function() {
 
 #' Install System Dependencies
 #'
-#' Infers and installs system dependencies from `DESCRIPTION` via the [r-hub/sysreqs](https://github.com/r-hub/sysreqs) project.
+#' Infers and installs system dependencies from `DESCRIPTION`
+#' via the [r-hub/sysreqs](https://github.com/r-hub/sysreqs) project.
 #'
 #' @family compute environment functions
 #' @keywords internal
@@ -39,7 +41,8 @@ install_sysdeps <- function() {
 
 #' Directory for copying dependencies to docker build context
 #'
-#' This directory serves to copy the package cache into the docker build context on GitHub actions.
+#' This directory serves to copy the package cache
+#' into the docker build context on GitHub actions.
 #'
 #' @family compute environment functions
 #' @keywords internal

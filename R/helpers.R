@@ -1,6 +1,8 @@
 #' Browse to URL
 #'
-#' @details This function is copied from an unexported function in [usethis](https://github.com/r-lib/usethis/blob/23dd62c5e7713ed8ecceae82e6338f795d30ba92/R/helpers.R).
+#' @details
+#' This function is copied from an unexported function in
+#' [usethis](https://github.com/r-lib/usethis/blob/23dd62c5e7713ed8ecceae82e6338f795d30ba92/R/helpers.R).
 #'
 #' @param ... Elements of the URL
 #' @param open `[logical(1)]` giving whether the URL should be opened
@@ -24,17 +26,18 @@ remove_dep <- function(x) {
   desc::desc_del_dep(x)
   usethis::ui_done(
     x = glue::glue(
-      "Removing {dep} from DESCRIPTION again, because it is already included in the muggle image.",
+      "Removing {dep} from DESCRIPTION again, ",
+      "because it is already included in the muggle image.",
       dep = x
     )
   )
 }
 
 #' Muggle files
-#' 
-#' @param muggle_file 
+#'
+#' @param muggle_file
 #' File to copy, relative path from built package root.
-#' 
+#'
 #' @keywords internal
 #' @export
 get_muggle_file <- function(muggle_file) {
@@ -42,16 +45,16 @@ get_muggle_file <- function(muggle_file) {
 }
 
 #' Temporarily get muggle files
-#' 
+#'
 #' Copies muggle files ([get_muggle_file()]) to the working directory.
 #' Files are deleted when `.local_envir` expires.
 #' If file already exists, only a warning is thrown.
 #' Useful to avoid pasting boilerplate files in muggle packages.
-#' 
+#'
 #' @inheritParams get_muggle_file
-#' 
+#'
 #' @inheritParams withr::local_file
-#' 
+#'
 #' @keywords internal
 #' @export
 local_muggle_file <- function(muggle_file, .local_envir = parent.frame()) {
@@ -62,14 +65,18 @@ local_muggle_file <- function(muggle_file, .local_envir = parent.frame()) {
       "To use muggle defaults, remove the file."
     ))
   } else {
-    target <- withr::local_file(.file = muggle_file, .local_envir = .local_envir)
+    target <- withr::local_file(
+      .file = muggle_file,
+      .local_envir = .local_envir
+    )
     fs::file_copy(path = get_muggle_file(muggle_file), new_path = target)
   }
 }
 
 #' Determine if code is running inside GitHub Actions
 #'
-#' Looks for the `GITHUB_ACTIONS` environment variable, as [documented](https://docs.github.com/en/actions/configuring-and-managing-workflows/using-environment-variables)
+#' Looks for the `GITHUB_ACTIONS` environment variable, as
+#' [documented](https://docs.github.com/en/actions/configuring-and-managing-workflows/using-environment-variables)
 #'
 #' @keywords internal
 is_github_actions <- function() {

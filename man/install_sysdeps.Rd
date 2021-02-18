@@ -7,7 +7,8 @@
 install_sysdeps()
 }
 \description{
-Infers and installs system dependencies from \code{DESCRIPTION} via the \href{https://github.com/r-hub/sysreqs}{r-hub/sysreqs} project.
+Infers and installs system dependencies from \code{DESCRIPTION}
+via the \href{https://github.com/r-hub/sysreqs}{r-hub/sysreqs} project.
 }
 \seealso{
 Other compute environment functions: 

@@ -11,7 +11,8 @@ An object of class \code{fs_path} (inherits from \code{character}) of length 1.
 lib_cache_path
 }
 \description{
-This directory serves to copy the package cache into the docker build context on GitHub actions.
+This directory serves to copy the package cache
+into the docker build context on GitHub actions.
 }
 \seealso{
 Other compute environment functions: 
