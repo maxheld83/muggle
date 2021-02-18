@@ -37,12 +37,14 @@ Forms a URL of the form \code{docker.pkg.github.com/OWNER/REPOSITORY/IMAGE_NAME:
 Notice how, different from Docker Hub, docker images on GitHub Packages have an \code{IMAGE_NAME} appended to the familiar \code{OWNER/REPOSITORY} pattern.
 These \code{IMAGE_NAME}s are immutable (cannot be changed nor deleted) and must be unique per GitHub repository.
 }
-\section{Functions}{
+\section{Related Functions and Methods}{
+\subsection{Functions}{
 \itemize{
 \item \code{gh_pkgs_image_name}: Get the docker image name conventionally used in muggle projects
-
+}
+\itemize{
 \item \code{gh_pkgs_image_version}: Get the sha of the \emph{latest} \verb{git commit} if on GitHub Actions, or the \emph{head} reference (the branch or tag) otherwise (not recommended for reproducibility).
-}}
+}}}
 
 \seealso{
 Other compute environment functions: 

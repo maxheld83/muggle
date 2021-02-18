@@ -26,8 +26,10 @@ personalized defaults using package options}
 \item{license_holder}{giving the license holder, used as \code{cph} and \code{fnd} role in \code{DESCRIPTION}}
 
 \item{organisation}{If supplied, the repo will be created under this
-organisation, instead of the account of the user associated with the
-\code{auth_token}. You must have permission to create repositories.}
+organisation, instead of the login associated with the GitHub token
+discovered for this \code{host}. The user's role and the token's scopes must be
+such that you have permission to create repositories in this
+\code{organisation}.}
 
 \item{private}{If \code{TRUE}, creates a private repository.}
 }
