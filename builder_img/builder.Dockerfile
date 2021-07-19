@@ -65,6 +65,8 @@ SHELL ["Rscript", "-e"]
 RUN system(command = sysreqs::sysreq_commands('DESCRIPTION'))
 # NA is so as to ensure that suggests deps such as metar are not baked into the builder image
 RUN options(warn = 2); remotes::install_deps(dependencies = NA)
+# does not get picked up by sysreqs https://github.com/subugoe/muggle/issues/204
+RUN shinytest::installDependencies()
 
 # install builder software (needed at build time, not at run time)
 COPY . .
