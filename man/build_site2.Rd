@@ -86,67 +86,63 @@ though not when building pkgdown.
 \section{YAML config - navbar}{
 
 
-
-By default, the top navigation bar (the "navbar") will contain links to:
+By default, the top navbar will contain links to:
 \itemize{
-\item The home page, with a "home" icon.
-\item "Get Started", if you have an article with the same name as the package
-(e.g., \code{vignettes/pkgdown.Rmd}).
-\item Reference
+\item "Get Started", if you have an article with the same name as the package (e.g., \code{vignettes/pkgdown.Rmd}).
+\item The reference index.
 \item Articles (i.e., vignettes, if present).
 \item News (if present).
-\item A "github" icon with a link to your
-github repo (if listed in the \code{DESCRIPTION} url field).
+\item An icon linking to the source repository.
 }
 
-You can override these defaults with the  \code{navbar} field. It has two primary
-components: \code{structure} and \code{components}. These components interact in
-a somewhat complicated way, but the complexity allows you to make minor
-tweaks to part of the navbar while relying on pkgdown to automatically
-generate the rest.
+You can override (and even remove) these defaults with the \code{navbar} field.
+It has two primary components: \code{structure} and \code{components}.
+These components interact in a somewhat complicated way, but the complexity allows you to make minor tweaks to part of the navbar while relying on pkgdown to automatically generate the rest.
 
-The \code{structure} defines the layout of the navbar, i.e. the order
-of the components, and whether they're right aligned or left aligned.
-You can use this component to change the order of the default components,
-and to add your own components.\preformatted{navbar:
-  structure:
-    left:  [home, intro, reference, articles, tutorials, news]
-    right: [github]
-}
+The \code{structure} defines the layout of the navbar, i.e. the order of the components, and whether they're right aligned or left aligned.
+You can use this component to change the order of the default components, remove some default components and add your own components.\if{html}{\out{<div class="sourceCode yaml">}}\preformatted{navbar:
+ structure:
+   left:  [intro, reference, articles, tutorials, news]
+   right: [github]
+}\if{html}{\out{</div>}}
 
 The \code{components} describes the appearance of each element in the navbar.
-It uses the same
-syntax as \href{https://bookdown.org/yihui/rmarkdown/rmarkdown-site.html#site-navigation}{RMarkdown}.
-The following YAML snippet illustrates some of the most important features.\preformatted{navbar:
-  components:
-    home: ~
-    articles:
-     text: Articles
-     menu:
-     - text: Category A
-     - text: Title A1
-       href: articles/a1.html
-     - text: Title A2
-       href: articles/a2.html
-     - text: -------
-     - text: "Category B"
-     - text: Title B1
-       menu:
-       - text "Sub-category B11"
-         href: articles/b11.html
-     twitter:
-       icon: "fab fa-twitter fa-lg"
-       href: https://twitter.com/hadleywickham
-}
+It uses the same syntax as \href{https://bookdown.org/yihui/rmarkdown/rmarkdown-site.html#site-navigation}{RMarkdown}.
+The following YAML snippet illustrates some of the most important features.\if{html}{\out{<div class="sourceCode yaml">}}\preformatted{navbar:
+ components:
+   articles:
+    text: Articles
+    menu:
+    - text: Category A
+    - text: Title A1
+      href: articles/a1.html
+    - text: Title A2
+      href: articles/a2.html
+    - text: -------
+    - text: "Category B"
+    - text: Title B1
+      menu:
+      - text: "Sub-category B11"
+        href: articles/b11.html
+    twitter:
+      icon: "fab fa-twitter fa-lg"
+      href: https://twitter.com/hadleywickham
+      aria-label: "twitter account"
+}\if{html}{\out{</div>}}
 
-Components can contain sub-\code{menu}s with headings (indicated by missing
-\code{href}) and separators (indicated by a bunch of \code{-}). You can also use \code{icon}s
-from \href{https://fontawesome.com/icons?d=gallery}{fontawesome}.
+Components can contain sub-\code{menu}s with headings (indicated by missing \code{href}) and separators (indicated by a bunch of \code{-}).
+You can also use \code{icon}s from \href{https://fontawesome.com/icons?d=gallery}{fontawesome}.
+When using icons with no text, for accessibility it's best practice to include an \code{aria-label} for screenreader users.
 
-This yaml would override the default "articles" component, eliminate
-the "home" component, and add a new "twitter" component. Unless you
-explicitly mention new components in the \code{structure} they'll be added
-to the far right of the left menu.
+This yaml would override the default "articles" component, and add a new "twitter" component.
+Unless you explicitly mention new components in the \code{structure} they'll be added to the far right of the left menu.
+
+You can also customize the color scheme of the navbar by using the \href{https://getbootstrap.com/docs/4.0/components/navbar/#color-schemes}{\code{type} and \code{bg} parameters}:\if{html}{\out{<div class="sourceCode yaml">}}\preformatted{navbar:
+  type: dark
+  bg: primary
+}\if{html}{\out{</div>}}
+
+will produce a navbar with a dark background of the primary color (defined by Bootstrap default, a Bootswatch theme, or bslib variable cf \code{vignette("customization", package ="pkgdown")})
 
 }
 
