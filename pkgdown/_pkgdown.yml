@@ -41,6 +41,9 @@ reference:
 - title: Interactive Use
   desc: >
     Wrappers with muggle defaults.
+- subtitle: Helpers to save some typing
+- contents:
+  - has_concept("functions for interactive use")
 - subtitle: Pkgdown Website
 - contents:
   - has_concept("pkgdown functions")
