@@ -1,6 +1,6 @@
 Package: muggle
 Title: Opinionated Devops for R Data Products Strictly Without Magic
-Version: 0.1.1-20210716
+Version: 0.1.2-20211125
 Authors@R:
     c(person(given = "Maximilian",
              family = "Held",
