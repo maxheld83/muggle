@@ -1,0 +1,14 @@
+pandoc: '2.5'
+pkgdown: 1.6.1
+pkgdown_sha: ~
+articles:
+  communicating: communicating.html
+  motivation: motivation.html
+  shiny-text: shiny-text.html
+  vignette-muggle: vignette-muggle.html
+  vignette-pkgdown: vignette-pkgdown.html
+last_built: 2021-11-26T10:31Z
+urls:
+  reference: https://subugoe.github.io/muggle/reference
+  article: https://subugoe.github.io/muggle/articles
+

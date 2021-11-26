@@ -1,0 +1,21 @@
+.shiny-embed-pkgdown {
+  margin-top: 50px;
+  /* enable this if you like to see the footer */
+  /* margin-bottom: 115px; */
+  position: fixed;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  right: 0;
+}
+/* must be hidden otherwise it gets overlaid over the app */
+.page-header{
+  visibility: hidden
+}
+/* must be hidden otherwise it gets overlaid over the app */
+footer{
+  visibility: hidden
+}
+.shiny-embed-pkgdown iframe {
+  border: none;
+}
