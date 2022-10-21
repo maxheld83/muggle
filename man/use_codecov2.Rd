@@ -7,9 +7,14 @@
 use_codecov2(reposlug)
 }
 \arguments{
-\item{reposlug}{\verb{[character(1)]} giving the \code{username/repo} URL slug of the project.}
+\item{reposlug}{\verb{[character(1)]}
+giving the \code{username/repo} URL slug of the project.}
 }
 \description{
 Set up codecov
 }
-\concept{testing functions}
+\seealso{
+Other quality control functions: 
+\code{\link{use_superlinter}()}
+}
+\concept{quality control functions}
