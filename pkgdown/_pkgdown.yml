@@ -1,14 +1,11 @@
 authors:
   Maximilian Held:
     href: https://www.maxheld.de
-  Göttingen State and University Library:
-    href: https://www.sub.uni-goettingen.de/
 template:
-  package: subugoetheme
   params:
     docsearch:
       api_key: 6210bf760111eb2d7173ad99203499e2
-      index_name: subugoe_muggle
+      index_name: maxheld83_muggle
 reference:
 - title: Setup and Update
   desc: >

@@ -4,9 +4,9 @@ FROM rstudio/r-base:4.1.1-focal AS base
 # below have to be in sync with above base image
 # there seems to be no better way; cannot persist env vars based on running scripts
 ENV R_HOME="/opt/R/4.1.1/lib/R"
-# this freezes r dependencies see https://github.com/subugoe/muggle/issues/60
+# this freezes r dependencies see https://github.com/maxheld83/muggle/issues/60
 ENV RSPM="https://packagemanager.rstudio.com/all/__linux__/focal/2021-11-23+MTo2NDY5MDY1LDI6NDUyNjIxNTs4NTZEODU0QQ"
-# TODO remove when migrated to rspm https://github.com/subugoe/muggle/issues/25
+# TODO remove when migrated to rspm https://github.com/maxheld83/muggle/issues/25
 ENV RHUB_PLATFORM="linux-x86_64-ubuntu-gcc"
 # just FYI; this is were base pkg live, they are always available
 ENV R_LIBS_BASE=$R_HOME/library/
@@ -27,7 +27,7 @@ ENV R_LIBS_RUNTIME_DOCKER=/tempdir/Library/
 ENV R_LIBS_RUNTIME=$R_LIBS_RUNTIME_DOCKER:$R_LIBS_RUNTIME_GH
 
 # install system dependencies manually
-# TODO these are hacks and should be superseded by https://github.com/subugoe/muggle/issues/25
+# TODO these are hacks and should be superseded by https://github.com/maxheld83/muggle/issues/25
 RUN apt-get update && apt-get install -y \
   # hack-fix for https://github.com/r-hub/sysreqsdb/issues/77
   software-properties-common \
@@ -47,7 +47,7 @@ FROM base as buildtime
 # TODO might have to factor out *dev*-time deps (rstudio?) too
 
 # install azure cli
-# TODO remove this https://github.com/subugoe/shinycaas/issues/32
+# TODO remove this https://github.com/maxheld83/shinycaas/issues/32
 RUN ["bash", "-c", "curl -sL https://aka.ms/InstallAzureCLIDeb | bash"]
 
 # this folder has to *exist* to work as a lib
@@ -65,7 +65,7 @@ SHELL ["Rscript", "-e"]
 RUN system(command = sysreqs::sysreq_commands('DESCRIPTION'))
 # NA is so as to ensure that suggests deps such as metar are not baked into the builder image
 RUN options(warn = 2); remotes::install_deps(dependencies = NA)
-# does not get picked up by sysreqs https://github.com/subugoe/muggle/issues/204
+# does not get picked up by sysreqs https://github.com/maxheld83/muggle/issues/204
 RUN shinytest::installDependencies()
 
 # install builder software (needed at build time, not at run time)

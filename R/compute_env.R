@@ -22,7 +22,7 @@ use_onbuild_image <- function() {
 #' @export
 install_sysdeps <- function() {
   checkmate::assert_file_exists("DESCRIPTION")
-  # TODO migrate to rspm db https://github.com/subugoe/muggle/issues/25
+  # TODO migrate to rspm db https://github.com/maxheld83/muggle/issues/25
   sysdep_cmds <- sysreqs::sysreq_commands("DESCRIPTION")
   if (sysdep_cmds == "") {
     cli::cli_alert_info(

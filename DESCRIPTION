@@ -6,17 +6,15 @@ Authors@R:
              family = "Held",
              role = c("aut", "cre"),
              email = "info@maxheld.de",
-             comment = c(ORCID = "0000-0002-4703-5388")),
-      person(given = "Göttingen State and University Library",
-             role = c("cph", "fnd")))
+             comment = c(ORCID = "0000-0002-4703-5388")))
 Description: What the package does (one paragraph).
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.1.9999
-URL: https://github.com/subugoe/muggle, https://subugoe.github.io/muggle
-BugReports: https://github.com/subugoe/muggle/issues
+URL: https://github.com/maxheld83/muggle, https://maxheld83.github.io/muggle
+BugReports: https://github.com/maxheld83/muggle/issues
 Imports:
     usethis (>= 1.6.1),
     checkmate (>= 2.0.0),
@@ -25,7 +23,6 @@ Imports:
     fs (>= 1.4.1),
     desc (>= 1.2.0),
     withr (>= 2.2.0),
-    sysreqs (>= 1.0.0.9000),
     remotes (>= 2.1.1),
     glue (>= 1.4.1),
     covr (>= 3.5.0),
@@ -41,12 +38,8 @@ Imports:
     testthat (>= 2.3.2),
     shinytest (>= 1.5.0)
 Suggests:
-    subugoetheme,
     shiny (>= 1.5.0),
     ggplot2 (>= 3.3.2),
     roxygen2
 Remotes:
-    r-hub/sysreqs@f068afa96c2f454a54de0b350800dee7564239df,
-    maxheld83/roxygen@canary,
-    subugoe/subugoetheme@1.1.1,
-    subugoe/shinycaas@551e261df98a079d2fe0aaa820b8371c7e42422c
+    maxheld83/shinycaas@551e261df98a079d2fe0aaa820b8371c7e42422c

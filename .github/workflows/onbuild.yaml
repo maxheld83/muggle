@@ -1,0 +1,14 @@
+on:
+  push:
+  pull_request:
+    types: [assigned, opened, synchronize, reopened]
+  release:
+    types: [published, created, edited]
+
+jobs:
+  build-onbuild:
+    runs-on: ubuntu-22.04
+    steps:
+      - name: "Test"
+        run: |
+          echo "Hello World"

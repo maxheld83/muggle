@@ -33,7 +33,7 @@ That could become quite frustrating: Stakeholders would be unhappy because the a
 Now, I think teams and organisation *must* transition to scripted data science, if they don't want to concede this area of value generation to others.
 But, without a proper setup, and in the short term, the honest answer has been that often, excel would get the job done better.
 
-Over the past nine months, I've tried out a new approach with my team at the State- and University Library Göttingen, Germany, where we do bibliometric data analytics.
+Over the past nine months, I've tried out a new approach with various teams.
 I think we've found two ways to bridge this unproductive valley from GUI to scripts.
 
 First, we have strategically realigned our work around building data products.

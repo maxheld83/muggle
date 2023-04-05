@@ -6,7 +6,7 @@ pkgdown:
   as_is: true
 ---
 
-This vignettes documents how you can use `bookdown::html_document2()` and tests its compatibility with the subugoetheme against the default.
+This vignettes documents how you can use `bookdown::html_document2()` and tests its compatibility with the maxheld83theme against the default.
 
 ```{r, child=muggle::get_muggle_file("vignettes/formatting.Rmd")}
 ```

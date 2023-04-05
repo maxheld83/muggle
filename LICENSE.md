@@ -1,6 +1,6 @@
 # MIT License
 
-Copyright (c) 2020 Göttingen State and University Library
+Copyright (c) 2023 Maximilian Held
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal

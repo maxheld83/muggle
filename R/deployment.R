@@ -11,7 +11,7 @@
 #'
 #' Currently, GitHub Packages does not offer public images,
 #' even for public repositories
-#' ([#133](https://github.com/subugoe/muggle/issues/133))
+#' ([#133](https://github.com/maxheld83/muggle/issues/133))
 #' That means that Azure must be
 #' [authenticated](https://docs.github.com/en/packages/using-github-packages-with-your-projects-ecosystem/configuring-docker-for-use-with-github-packages)
 #' to be able to download the runtime images.
@@ -19,7 +19,7 @@
 #' which authenticates the GitHub Actions runtime to talk to Azure.
 #'
 #' There are (only) two ways to do this,
-#' both suboptimal ([#132](https://github.com/subugoe/muggle/issues/132)):
+#' both suboptimal ([#132](https://github.com/maxheld83/muggle/issues/132)):
 #'
 #' 1. You can authenticate Azure with a
 #'    [personal access token (PAT)](https://docs.github.com/en/github/authenticating-to-github/creating-a-personal-access-token)
