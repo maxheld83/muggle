@@ -11,9 +11,6 @@ concurrency:
   # ... except for main, where we want a full record of CI
   cancel-in-progress: ${{ github.ref_name != 'main' }}
 
-defaults:
-  runs-on: ubuntu-22.04
-
 jobs:
   build-onbuild:
     name: "Build Images with ONBUILD Instructions"
