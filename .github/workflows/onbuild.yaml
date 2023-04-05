@@ -1,4 +1,4 @@
-----
+---
 name: Onbuild
 
 on:
@@ -17,6 +17,7 @@ defaults:
 jobs:
   build-onbuild:
     name: "Build Images with ONBUILD Instructions"
+    runs-on: ubuntu-22.04
     steps:
       - name: "Checkout"
         uses: actions/checkout@v3
