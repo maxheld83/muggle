@@ -35,22 +35,31 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
           logout: false
       - name: "Build and Push Images"
+        # cache-to is disabled below because of #218
         run: |
           make bake \
             tag_from_git_sha="${{ github.sha }}" \
             git_ref_name="${{ github.ref_name }}" \
-            is_ci=true
+            is_ci=true \
+            bake_args="--set=*.cache-to="type=inline""
   # workaround for missing multi-node registry cache, tracked in #218
-  build-onbuild-armcache:
-    name: "Build ARM64 Cache"
+  build-onbuild-cache-multiarch:
+    name: "Build Multiarch Cache"
     runs-on: ubuntu-22.04
+    strategy:
+      fail-fast: false
+      matrix:
+        arch: [
+          linux/arm64,
+          linux/amd64
+        ]
     steps:
       - name: "Checkout"
         uses: actions/checkout@v3
       - name: "Set up QEMU"
         uses: docker/setup-qemu-action@v2
         with:
-          platforms: "linux/arm64"
+          platforms: ${{ matrix.arch }}
       - name: "Set up Docker Buildx"
         uses: docker/setup-buildx-action@v2
         with:
@@ -63,11 +72,11 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
           logout: false
-      - name: "Build and Push ARM64 Image Cache"
+      - name: "Build and Push Arch Image Cache"
         run: |
-          ARCH="arm64" \
+          ARCH="${{ matrix.arch }}" \
             make bake \
               tag_from_git_sha="${{ github.sha }}" \
               git_ref_name="${{ github.ref_name }}" \
               is_ci=true \
-              bake_args="--set=*.platform=linux/arm64  --set=*.output='type=tar,dest=throwaway.tar'"
+              bake_args="--set=*.platform=${{ matrix.arch }} --set=*.output='type=tar,dest=throwaway.tar'"
