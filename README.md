@@ -59,3 +59,11 @@ They can have more dependencies and they need not run in different computing env
 6. **R Packages are for Code, not Data**.
    {muggle} does not ship data with a package, but only wrapper functions which either call databases or git lfs storage.
    Only small or unchanging datasets can be stored inside packages.
+
+
+## Getting Started
+
+### `make` Targets
+
+All DevOps-steps are stored as `make` targets.
+To see all targets, simply run `make`.
