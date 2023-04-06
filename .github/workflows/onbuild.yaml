@@ -79,4 +79,4 @@ jobs:
               tag_from_git_sha="${{ github.sha }}" \
               git_ref_name="${{ github.ref_name }}" \
               is_ci=true \
-              bake_args="--set=*.platform=${{ matrix.arch }} --set=*.output='type=tar,dest=throwaway.tar'"
+              bake_args="--set=*.platform=${{ matrix.arch }} --set=*.output='type=local,dest=.'"
