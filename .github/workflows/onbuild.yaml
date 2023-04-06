@@ -39,4 +39,4 @@ jobs:
           make bake \
             tag_from_git_sha="${{ github.sha }}" \
             git_ref_name="${{ github.ref_name }}" \
-            bake_args="--push"
+            is_ci=true
