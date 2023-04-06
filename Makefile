@@ -5,9 +5,13 @@
 git_ref_name ?= $(shell git rev-parse --abbrev-ref HEAD || echo latest)
 # above git ref may not be valid docker tag
 tag_from_git_ref_name := $(shell echo ${git_ref_name} | sed 's/[^a-zA-Z0-9._-]/-/g')
+export TAG_FROM_GIT_REF_NAME=$(tag_from_git_ref_name)
 tag_from_git_sha ?= latest
 # this can be conveniently overwritten for --print and metadata file
-bake_args ?= --load
+export TAG_FROM_GIT_SHA=$(tag_from_git_sha)
+# placeholder to be overwritten with --print for debugging etc
+bake_args ?= --progress auto
+is_ci := false
 bake_targets := "builder" "developer"
 smoke_test_jobs := $(addprefix smoke-test-,${bake_targets})
 
@@ -17,21 +21,18 @@ all: bake
 .PHONY: bake
 ## Build all docker images
 bake:
-	TAG_FROM_GIT_REF_NAME=$(tag_from_git_ref_name) \
-		TAG_FROM_GIT_SHA=$(tag_from_git_sha) \
-		docker buildx bake \
-			--file compose.yaml \
-			--file .env \
-			$(bake_args)
-
-bake2:
-	TAG_FROM_GIT_SHA=$(tag_from_git_sha) \
-		TAG_FROM_GIT_REF_NAME=$(tag_from_git_ref_name) \
-		CAN_PUSH=$(can_push) \
-		docker buildx bake \
-			--file docker-bake.hcl \
-			--file .env \
-			$(bake_args)
+ifeq ($(is_ci), true)
+	docker buildx bake \
+		--file compose.yaml \
+		--file .env \
+		--push
+else
+	docker buildx bake \
+		--file compose.yaml \
+		--file .env \
+		--load \
+		--set=*.cache-to="type=inline"
+endif
 
 .DEFAULT_GOAL := show-help
 

@@ -1,13 +1,15 @@
 services:
   builder:
-    image: ${REGISTRY_PREFIX_GHCR}/${IMAGE_OWNER}/${IMAGE_NAME_ROOT}/builder:${TAG_FROM_GIT_REF_NAME:-latest}
+    image: ${REGISTRY_PREFIX_GHCR}/${IMAGE_OWNER}/${IMAGE_NAME_ROOT}/onbuild/builder:${TAG_FROM_GIT_REF_NAME:-latest}
     build:
       dockerfile: onbuild.Dockerfile
       target: base
       tags: 
-        - ${REGISTRY_PREFIX_GHCR}/${IMAGE_OWNER}/${IMAGE_NAME_ROOT}/builder:${TAG_FROM_GIT_REF_NAME:-latest}
-        - ${REGISTRY_PREFIX_GHCR}/${IMAGE_OWNER}/${IMAGE_NAME_ROOT}/builder:${TAG_FROM_GIT_SHA:-latest}
+        - ${REGISTRY_PREFIX_GHCR}/${IMAGE_OWNER}/${IMAGE_NAME_ROOT}/onbuild/builder:${TAG_FROM_GIT_REF_NAME:-latest}
+        - ${REGISTRY_PREFIX_GHCR}/${IMAGE_OWNER}/${IMAGE_NAME_ROOT}/onbuild/builder:${TAG_FROM_GIT_SHA:-latest}
       x-bake:
-        plaforms:
-          - linux/amd64
-          - linux/arm64
+        cache-from:
+          - "type=registry,ref=${REGISTRY_PREFIX_GHCR}/${IMAGE_OWNER}/${IMAGE_NAME_ROOT}/onbuild/builder/cache:${TAG_FROM_GIT_REF_NAME}"
+          - "type=registry,ref=${REGISTRY_PREFIX_GHCR}/${IMAGE_OWNER}/${IMAGE_NAME_ROOT}/onbuild/builder/cache:${DEFAULT_BRANCH}"
+        cache-to:
+          - "type=registry,ref=${REGISTRY_PREFIX_GHCR}/${IMAGE_OWNER}/${IMAGE_NAME_ROOT}/onbuild/builder/cache:${TAG_FROM_GIT_REF_NAME},mode=max"
