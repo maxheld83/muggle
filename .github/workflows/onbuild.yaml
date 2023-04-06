@@ -45,6 +45,8 @@ jobs:
   # workaround for missing multi-node registry cache, tracked in #218
   build-onbuild-cache-multiarch:
     name: "Build Multiarch Cache"
+    # helps to avoid concurrency issues with GHCR
+    needs: build-onbuild
     runs-on: ubuntu-22.04
     strategy:
       fail-fast: false
