@@ -8,7 +8,7 @@ tag_from_git_ref_name := $(shell echo ${git_ref_name} | sed 's/[^a-zA-Z0-9._-]/-
 tag_from_git_sha ?= latest
 can_push := false
 # this can be conveniently overwritten for --print and metadata file
-bake_args ?= --progress auto
+bake_args ?= --load
 bake_targets := "builder" "developer"
 smoke_test_jobs := $(addprefix smoke-test-,${bake_targets})
 
@@ -18,6 +18,12 @@ all: bake
 .PHONY: bake
 ## Build all docker images
 bake:
+	docker buildx bake \
+		--file compose.yaml \
+		--file .env \
+		$(bake_args)
+
+bake2:
 	TAG_FROM_GIT_SHA=$(tag_from_git_sha) \
 		TAG_FROM_GIT_REF_NAME=$(tag_from_git_ref_name) \
 		CAN_PUSH=$(can_push) \

@@ -6,6 +6,8 @@ FROM rstudio/r-base:4.1.1-focal AS base
 ENV R_HOME="/opt/R/4.1.1/lib/R"
 # this freezes r dependencies see https://github.com/maxheld83/muggle/issues/60
 ENV RSPM="https://packagemanager.rstudio.com/all/__linux__/focal/2021-11-23+MTo2NDY5MDY1LDI6NDUyNjIxNTs4NTZEODU0QQ"
+
+FROM base AS intermediary
 # TODO remove when migrated to rspm https://github.com/maxheld83/muggle/issues/25
 ENV RHUB_PLATFORM="linux-x86_64-ubuntu-gcc"
 # just FYI; this is were base pkg live, they are always available
@@ -42,7 +44,7 @@ RUN options(warn = 2); install.packages('remotes')
 RUN options(warn = 2); remotes::install_github('r-hub/sysreqs', ref='f068afa96c2f454a54de0b350800dee7564239df')
 SHELL ["sh", "-c"]
 
-FROM base as buildtime
+FROM intermediary as buildtime
 # this is for buildtime dependencies only
 # TODO might have to factor out *dev*-time deps (rstudio?) too
 
@@ -93,7 +95,7 @@ ONBUILD COPY . .
 ONBUILD RUN devtools::document()
 ONBUILD RUN remotes::install_local(upgrade = FALSE)
 
-FROM base as runtime
+FROM intermediary as runtime
 ONBUILD SHELL ["Rscript", "-e"]
 # sysdeps have to be installed again, because there appears to be no clear way to copy them
 ONBUILD COPY DESCRIPTION .

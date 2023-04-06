@@ -34,3 +34,6 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
           logout: false
+      - name: "Build and Push Images"
+        run: |
+          make bake

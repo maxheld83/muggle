@@ -1,0 +1,12 @@
+services:
+  builder:
+    image: ${REGISTRY_PREFIX_GHCR}/${IMAGE_OWNER}/${IMAGE_NAME_ROOT}/builder:${TAG_FROM_GIT_REF_NAME:-latest}
+    build:
+      dockerfile: onbuild.Dockerfile
+      target: base
+      tags: 
+        - foobar:latest
+      x-bake:
+        plaforms:
+          - linux/amd64
+          - linux/arm64
