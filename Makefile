@@ -41,7 +41,7 @@ bake-multiarch-cache:
 		--file compose.yaml \
 		--file .env \
 		--set=*.platform='$(ARCH)' \
-		--set=*.output="type=image,push=true" \
+		--set=*.output="type=image,push=false" \
 		$(bake_args)
 
 .DEFAULT_GOAL := show-help
