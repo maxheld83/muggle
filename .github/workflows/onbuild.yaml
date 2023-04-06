@@ -79,4 +79,4 @@ jobs:
               tag_from_git_sha="${{ github.sha }}" \
               git_ref_name="${{ github.ref_name }}" \
               is_ci=true \
-              bake_args="--set=*.platform=${{ matrix.arch }}"
+              bake_args="--set=*.platform='${{ matrix.arch }}'"
