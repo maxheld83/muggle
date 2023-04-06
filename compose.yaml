@@ -17,4 +17,4 @@ services:
           - "type=registry,ref=${REGISTRY_PREFIX_GHCR}/${IMAGE_OWNER}/${IMAGE_NAME_ROOT}/onbuild/builder/cache/linux/amd64:${DEFAULT_BRANCH}"
         cache-to:
           # workaround for missing multi-node registry cache, tracked in #218
-          - "type=registry,ref=${REGISTRY_PREFIX_GHCR}/${IMAGE_OWNER}/${IMAGE_NAME_ROOT}/onbuild/builder/cache/${ARCH}:${TAG_FROM_GIT_REF_NAME},mode=max"
+          - "type=registry,ref=${REGISTRY_PREFIX_GHCR}/${IMAGE_OWNER}/${IMAGE_NAME_ROOT}/onbuild/builder/cache/${ARCH:-linux/amd64}:${TAG_FROM_GIT_REF_NAME},mode=max"
