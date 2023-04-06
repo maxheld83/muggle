@@ -48,8 +48,12 @@ jobs:
     # helps to avoid concurrency issues with GHCR
     needs: build-onbuild
     runs-on: ubuntu-22.04
+    # this is just caching after all
+    continue-on-error: true
     strategy:
       fail-fast: false
+      # avoid more concurrency
+      max-parallel: 1
       matrix:
         arch: [
           linux/arm64,
