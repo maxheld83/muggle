@@ -25,13 +25,15 @@ ifeq ($(is_ci), true)
 	docker buildx bake \
 		--file compose.yaml \
 		--file .env \
-		--push
+		--push \
+		--set=*.platform="linux/arm64,linux/amd64" \
+		$(bake_args)
 else
 	docker buildx bake \
 		--file compose.yaml \
 		--file .env \
-		--load \
-		--set=*.cache-to="type=inline"
+		--set=*.cache-to="type=inline" \
+		$(bake_args)
 endif
 
 .DEFAULT_GOAL := show-help

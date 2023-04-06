@@ -1,11 +1,24 @@
-FROM rstudio/r-base:4.1.1-focal AS base
-# stuff used in all downstream stages (builder and prod)
+# syntax=docker/dockerfile:1.4
 
-# below have to be in sync with above base image
-# there seems to be no better way; cannot persist env vars based on running scripts
-ENV R_HOME="/opt/R/4.1.1/lib/R"
-# this freezes r dependencies see https://github.com/maxheld83/muggle/issues/60
-ENV RSPM="https://packagemanager.rstudio.com/all/__linux__/focal/2021-11-23+MTo2NDY5MDY1LDI6NDUyNjIxNTs4NTZEODU0QQ"
+# bump this to bust the cache
+ARG BUST_CACHE=1
+
+FROM ubuntu:jammy AS base
+
+SHELL ["/bin/bash", "-c"]
+RUN set -o pipefail
+ARG DEBIAN_FRONTEND=noninteractive
+
+# default place to mount or copy project source
+ARG SOURCE_MOUNT_PATH=/root/source/
+ENV SOURCE_MOUNT_PATH=$SOURCE_MOUNT_PATH
+RUN mkdir --parents $SOURCE_MOUNT_PATH
+
+RUN apt-get update && \
+  apt-get install --yes --no-install-recommends --allow-downgrades \
+  # needed for makefile
+  git-all=1:2.34.1-1ubuntu1.8 \
+  make=4.3-4.1build1
 
 FROM base AS intermediary
 # TODO remove when migrated to rspm https://github.com/maxheld83/muggle/issues/25
