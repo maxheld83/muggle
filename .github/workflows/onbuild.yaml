@@ -75,8 +75,6 @@ jobs:
       - name: "Build and Push Arch Image Cache"
         run: |
           ARCH="${{ matrix.arch }}" \
-            make bake \
+            make bake-multiarch-cache \
               tag_from_git_sha="${{ github.sha }}" \
-              git_ref_name="${{ github.ref_name }}" \
-              is_ci=true \
-              bake_args="--set=*.platform='${{ matrix.arch }}'"
+              git_ref_name="${{ github.ref_name }}"

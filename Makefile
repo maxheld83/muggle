@@ -36,6 +36,14 @@ else
 		$(bake_args)
 endif
 
+bake-multiarch-cache:
+	docker buildx bake \
+		--file compose.yaml \
+		--file .env \
+		--set=*.platform='$(ARCH)' \
+		--set=*.output="type=image,push=true" \
+		$(bake_args)
+
 .DEFAULT_GOAL := show-help
 
 # from https://gist.github.com/klmr/575726c7e05d8780505a
