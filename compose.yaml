@@ -5,7 +5,8 @@ services:
       dockerfile: onbuild.Dockerfile
       target: base
       tags: 
-        - foobar:latest
+        - ${REGISTRY_PREFIX_GHCR}/${IMAGE_OWNER}/${IMAGE_NAME_ROOT}/builder:${TAG_FROM_GIT_REF_NAME:-latest}
+        - ${REGISTRY_PREFIX_GHCR}/${IMAGE_OWNER}/${IMAGE_NAME_ROOT}/builder:${TAG_FROM_GIT_SHA:-latest}
       x-bake:
         plaforms:
           - linux/amd64
