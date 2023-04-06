@@ -37,6 +37,6 @@ jobs:
       - name: "Build and Push Images"
         run: |
           make bake \
-            git_ref_name="${{ github.ref_name }}" \
             tag_from_git_sha="${{ github.sha }}" \
-            bake_args = "--push"
+            git_ref_name="${{ github.ref_name }}" \
+            bake_args="--push"
