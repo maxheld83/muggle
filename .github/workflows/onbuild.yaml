@@ -41,7 +41,7 @@ jobs:
             tag_from_git_sha="${{ github.sha }}" \
             git_ref_name="${{ github.ref_name }}" \
             is_ci=true \
-            bake_args="--set=*.cache-to="type=inline""
+            bake_args="--set=*.cache-to='type=inline'"
   # workaround for missing multi-node registry cache, tracked in #218
   build-onbuild-cache-multiarch:
     name: "Build Multiarch Cache"
