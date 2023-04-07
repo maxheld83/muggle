@@ -12,6 +12,7 @@ export TAG_FROM_GIT_SHA=$(tag_from_git_sha)
 # placeholder to be overwritten with --print for debugging etc
 bake_args ?= --progress auto
 can_push := false
+export CAN_PUSH=$(can_push)
 bake_targets := "builder" "developer"
 smoke_test_jobs := $(addprefix smoke-test-,${bake_targets})
 
