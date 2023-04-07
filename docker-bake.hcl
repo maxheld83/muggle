@@ -12,7 +12,7 @@ variable "CAN_PUSH" {
 }
 // workarounds for missing multi-node registry cache, tracked in #218
 variable "ARCH" {
-  default = null
+  default = "linux/amd64"
 }
 variable "CAN_CACHE" {
   default = false

@@ -99,5 +99,4 @@ jobs:
           ARCH="${{ matrix.arch }}" \
             make bake-multiarch-cache \
               tag_from_git_sha="${{ github.sha }}" \
-              git_ref_name="${{ github.ref_name }}" \
-              can_cache=true
+              git_ref_name="${{ github.ref_name }}"

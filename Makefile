@@ -12,7 +12,6 @@ export TAG_FROM_GIT_SHA=$(tag_from_git_sha)
 # placeholder to be overwritten with --print for debugging etc
 bake_args ?= --progress auto
 can_push := false
-export CAN_PUSH=$(can_push)
 bake_targets := "builder" "developer"
 smoke_test_jobs := $(addprefix smoke-test-,${bake_targets})
 
@@ -28,12 +27,13 @@ bake:
 		$(bake_args)
 
 bake-multiarch-cache:
-	docker buildx bake \
-		--file docker-bake.hcl \
-		--file .env \
-		--set=*.platform='$(ARCH)' \
-		--set=*.output="type=image,push=false" \
-		$(bake_args)
+	CAN_CACHE=true \
+		docker buildx bake \
+			--file docker-bake.hcl \
+			--file .env \
+			--set=*.platform='$(ARCH)' \
+			--set=*.output="type=image,push=false" \
+			$(bake_args)
 
 .DEFAULT_GOAL := show-help
 
