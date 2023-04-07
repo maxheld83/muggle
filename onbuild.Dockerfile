@@ -33,6 +33,9 @@ RUN if [ "$TARGETPLATFORM" = "linux/arm64" ]; then ARCHITECTURE="arm64-"; else A
 ARG R_VERSION=4.2.3
 RUN rig add ${R_VERSION}
 
+FROM rstats AS runner
+ENV foo=bar
+
 FROM rstats as rstats1
 ENV RSPM_HOST=https://packagemanager.rstudio.com
 ENV RSPM_PATH=cran

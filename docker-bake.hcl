@@ -90,7 +90,7 @@ target "runner" {
     "default"
   ]
   dockerfile = "onbuild.Dockerfile"
-  target = "rstats"
+  target = "runner"
   cache-from = compose_cache_from_field("runner")
   cache-to = compose_cache_to_field("runner")
   tags = compose_tags_field("runner")
