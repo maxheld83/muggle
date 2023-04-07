@@ -29,7 +29,7 @@ bake:
 
 bake-multiarch-cache:
 	docker buildx bake \
-		--file compose.yaml \
+		--file docker-bake.hcl \
 		--file .env \
 		--set=*.platform='$(ARCH)' \
 		--set=*.output="type=image,push=false" \
