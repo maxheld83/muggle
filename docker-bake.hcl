@@ -60,7 +60,7 @@ function "compose_cache_from_field" {
 
 group "default" {
   targets = [
-    "base"
+    "runner"
   ]
 }
 
@@ -85,15 +85,15 @@ target "default" {
   output = or(CAN_PUSH, CAN_CACHE) ? ["type=registry"] : ["type=docker"]
 }
 
-target "base" {
+target "runner" {
   inherits = [
     "default"
   ]
   dockerfile = "onbuild.Dockerfile"
-  target = "base"
-  cache-from = compose_cache_from_field("builder")
-  cache-to = compose_cache_to_field("builder")
-  tags = compose_tags_field("builder")
+  target = "rstats"
+  cache-from = compose_cache_from_field("runner")
+  cache-to = compose_cache_to_field("runner")
+  tags = compose_tags_field("runner")
 }
 
 target "developer" {

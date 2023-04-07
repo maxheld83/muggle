@@ -18,18 +18,22 @@ FROM base AS python
 RUN apt-get update && apt-get install --yes --no-install-recommends \
   python3
 
-FROM base AS rstats
+FROM base AS helper
+RUN apt-get update && apt-get install --yes --no-install-recommends \
+  ca-certificates \
+  curl \
+  gpg
+
+FROM helper AS rstats
+ARG TARGETPLATFORM
 # install rig
 RUN if [ "$TARGETPLATFORM" = "linux/arm64" ]; then ARCHITECTURE="arm64-"; else ARCHITECTURE=""; fi \
   && curl -Ls https://github.com/r-lib/rig/releases/download/latest/rig-linux-"${ARCHITECTURE}"latest.tar.gz | \
   tar xz -C /usr/local
 ARG R_VERSION=4.2.3
+RUN rig add ${R_VERSION}
 
-RUN rig add ${R_VERSION} && rm -rf /tmp/*
-ARG R_HOME="/opt/R/$R_VERSION/lib/R"
-# must be ARG and ENV, because only ARG can be used with COPY --from
-ENV R_HOME=$R_HOME
-
+FROM rstats as rstats1
 ENV RSPM_HOST=https://packagemanager.rstudio.com
 ENV RSPM_PATH=cran
 ENV RSPM_DISTRO_AMD64=__linux__/focal
