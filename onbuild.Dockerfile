@@ -14,11 +14,67 @@ ARG SOURCE_MOUNT_PATH=/root/source/
 ENV SOURCE_MOUNT_PATH=$SOURCE_MOUNT_PATH
 RUN mkdir --parents $SOURCE_MOUNT_PATH
 
+FROM base AS python
+RUN apt-get update && apt-get install --yes --no-install-recommends \
+  python3
+
+FROM base AS rstats
+# install rig
+RUN if [ "$TARGETPLATFORM" = "linux/arm64" ]; then ARCHITECTURE="arm64-"; else ARCHITECTURE=""; fi \
+  && curl -Ls https://github.com/r-lib/rig/releases/download/latest/rig-linux-"${ARCHITECTURE}"latest.tar.gz | \
+  tar xz -C /usr/local
+ARG R_VERSION=4.2.3
+
+RUN rig add ${R_VERSION} && rm -rf /tmp/*
+ARG R_HOME="/opt/R/$R_VERSION/lib/R"
+# must be ARG and ENV, because only ARG can be used with COPY --from
+ENV R_HOME=$R_HOME
+
+ENV RSPM_HOST=https://packagemanager.rstudio.com
+ENV RSPM_PATH=cran
+ENV RSPM_DISTRO_AMD64=__linux__/focal
+# TODO add these once available on RSPM
+# have to build from source for arm64 for now
+ENV RSPM_DISTRO_ARM64=""
+# set in .env
+ARG RSPM_SNAPSHOT_DATE
+ARG RSPM_SNAPSHOT_QUERY
+RUN if [ "$TARGETPLATFORM" = "linux/amd64" ]; then \
+    RSPM_SNAPSHOT_URL="${RSPM_HOST}"/"${RSPM_PATH}"/"${RSPM_DISTRO_AMD64}"/"${RSPM_SNAPSHOT_DATE}"+"${RSPM_SNAPSHOT_QUERY}"; \
+  else \
+    RSPM_SNAPSHOT_URL="${RSPM_HOST}"/"${RSPM_PATH}"/"${RSPM_SNAPSHOT_DATE}"; \
+  fi \
+  && echo "options(repos = c(CRAN = '${RSPM_SNAPSHOT_URL}'))" >> $R_HOME/etc/Rprofile.site
+
+ARG LANG=en_US.UTF-8
+RUN apt-get install locales=2.31-0ubuntu9.9 --yes --no-install-recommends && /usr/sbin/locale-gen --lang ${LANG}
+
+FROM base AS helper
 RUN apt-get update && \
   apt-get install --yes --no-install-recommends --allow-downgrades \
   # needed for makefile
   git-all=1:2.34.1-1ubuntu1.8 \
   make=4.3-4.1build1
+RUN git config --global --add safe.directory $SOURCE_MOUNT_PATH
+
+FROM helper AS builder
+COPY DESCRIPTION .
+RUN Rscript -e 'pak:local_install_deps()'
+
+FROM builder AS developer
+RUN Rscript -e 'pak:local_install_deps(dependencies = TRUE)'
+ 
+# install gh CLI; helpful for authenticating with GitHub
+# instructions from https://github.com/cli/cli/blob/trunk/docs/install_linux.md
+RUN apt-get update && apt-get install --yes --no-install-recommends \
+  gpg \
+  curl
+RUN curl -fsSL https://cli.github.com/packages/githubcli-archive-keyring.gpg \
+  | gpg --dearmor -o /usr/share/keyrings/githubcli-archive-keyring.gpg;
+RUN echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/githubcli-archive-keyring.gpg] https://cli.github.com/packages stable main" \
+  | tee /etc/apt/sources.list.d/github-cli.list \
+  > /dev/null;
+RUN apt-get update && apt-get install --yes --no-install-recommends gh
 
 FROM base AS intermediary
 # TODO remove when migrated to rspm https://github.com/maxheld83/muggle/issues/25

@@ -34,13 +34,21 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
           logout: false
+      - name: Extract Metadata for Docker
+        id: meta
+        uses: docker/metadata-action@v4
+        with:
+          # image names and tags are actually defined in the bakefile
+          # TODO this should done by metadata-action,
+          # but is currently unsupported, tracked in #220
+          images: "i-am-ignored"
       - name: "Build and Push Images"
         # cache-to is disabled below because of #218
         run: |
           make bake \
             tag_from_git_sha="${{ github.sha }}" \
             git_ref_name="${{ github.ref_name }}" \
-            is_ci=true \
+            can_push=true \
             bake_args="--set=*.cache-to='type=inline'"
   # workaround for missing multi-node registry cache, tracked in #218
   build-onbuild-cache-multiarch:
@@ -78,9 +86,18 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
           logout: false
+      - name: Extract Metadata for Docker
+        id: meta
+        uses: docker/metadata-action@v4
+        with:
+          # image names and tags are actually defined in the bakefile
+          # TODO this should done by metadata-action,
+          # but is currently unsupported, tracked in #220
+          images: "i-am-ignored"
       - name: "Build and Push Arch Image Cache"
         run: |
           ARCH="${{ matrix.arch }}" \
             make bake-multiarch-cache \
               tag_from_git_sha="${{ github.sha }}" \
-              git_ref_name="${{ github.ref_name }}"
+              git_ref_name="${{ github.ref_name }}" \
+              can_cache=true

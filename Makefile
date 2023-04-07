@@ -11,7 +11,8 @@ tag_from_git_sha ?= latest
 export TAG_FROM_GIT_SHA=$(tag_from_git_sha)
 # placeholder to be overwritten with --print for debugging etc
 bake_args ?= --progress auto
-is_ci := false
+can_push := false
+export CAN_PUSH=$(can_push)
 bake_targets := "builder" "developer"
 smoke_test_jobs := $(addprefix smoke-test-,${bake_targets})
 
@@ -21,20 +22,10 @@ all: bake
 .PHONY: bake
 ## Build all docker images
 bake:
-ifeq ($(is_ci), true)
 	docker buildx bake \
-		--file compose.yaml \
+		--file docker-bake.hcl \
 		--file .env \
-		--push \
-		--set=*.platform="linux/arm64,linux/amd64" \
 		$(bake_args)
-else
-	docker buildx bake \
-		--file compose.yaml \
-		--file .env \
-		--set=*.cache-to="type=inline" \
-		$(bake_args)
-endif
 
 bake-multiarch-cache:
 	docker buildx bake \
