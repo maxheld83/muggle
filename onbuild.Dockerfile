@@ -34,7 +34,8 @@ ARG R_VERSION=4.2.3
 RUN rig add ${R_VERSION}
 
 FROM rstats AS runner
-ENV foo=bar
+ONBUILD COPY DESCRIPTION .
+ONBUILD RUN Rscript -e 'pak::local_install_deps()'
 
 FROM rstats as rstats1
 ENV RSPM_HOST=https://packagemanager.rstudio.com
